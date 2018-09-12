@@ -5,6 +5,14 @@ phone VARCHAR(15),
 cookie VARCHAR(50)
 );
 
+CREATE TABLE metadata(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+key VARCHAR(50),
+value VARCHAR(500),
+user_cookie VARCHAR(50),
+FOREIGN KEY(user_cookie) REFERENCES user(cookie)
+);
+
 CREATE TABLE counts(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 key VARCHAR(50),
