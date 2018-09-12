@@ -27,6 +27,8 @@ def home():
             c = conn.cursor()
             c.execute('INSERT INTO user (email,phone,cookie) VALUES("{}",{},"{}") '.format('ANON',0,user_id))
             c.execute('INSERT INTO counts (key,value,user_cookie) values("{}",{},"{}")'.format("visits",1,user_id))
+            c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("remote_addr",request.remote_addr,user_id))
+            c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("user_agent",request.user_agent,user_id))
             conn.commit()
             conn.close()
             resp = make_response(render_template('index.html',context=context[0]))
@@ -36,12 +38,29 @@ def home():
             conn = sqlite3.connect('app.db')
             c = conn.cursor()
             c.execute('SELECT value FROM counts where key="visits" and user_cookie="{}"'.format(request.cookies.get('user_id')))
-            visits = int(c.fetchone()[0])
+            visits = c.fetchone()
+            if visits != None:
+                visits = int(visits[0])
+            else:
+                user_id = uuid.uuid4().hex
+                conn = sqlite3.connect('app.db')
+                c = conn.cursor()
+                c.execute('INSERT INTO user (email,phone,cookie) VALUES("{}",{},"{}") '.format('ANON',0,user_id))
+                c.execute('INSERT INTO counts (key,value,user_cookie) values("{}",{},"{}")'.format("visits",1,user_id))
+                c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("remote_addr",request.remote_addr,user_id))
+                c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("user_agent",request.user_agent,user_id))
+                conn.commit()
+                conn.close()
+                resp = make_response(render_template('index.html',context=context[0]))
+                resp.set_cookie('user_id',user_id)
+                return resp
+
             c.execute('UPDATE counts set value={} where key="visits" and user_cookie="{}"'.format(visits+1,request.cookies.get('user_id')))
+            c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("remote_addr",request.remote_addr,request.cookies.get('user_id')))
+            c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("user_agent",request.user_agent,request.cookies.get('user_id')))
             conn.commit()
             conn.close()
             resp = make_response(render_template('index.html',context=context[0]))
-
 
         return resp
 
