@@ -1,0 +1,22 @@
+CREATE TABLE user(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+email VARCHAR(50),
+phone VARCHAR(15),
+cookie VARCHAR(50)
+);
+
+CREATE TABLE counts(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+key VARCHAR(50),
+value INTEGER,
+user_cookie VARCHAR(50),
+FOREIGN KEY(user_cookie) REFERENCES user(cookie)
+);
+
+CREATE TABLE message(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+user_cookie VARCHAR(50),
+message VARCHAR(500),
+FOREIGN KEY(user_cookie) REFERENCES user(cookie)
+);
+
