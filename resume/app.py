@@ -1,18 +1,14 @@
 from flask import Flask, render_template, request, make_response
-from flask_mail import Mail, Message
+from slackclient import SlackClient
 import json
 import sqlite3
 import uuid
 
 app = Flask(__name__)
 
-app.config['MAIL_SERVER'] = "smtp.gmail.com"
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = "ctfadvert@gmail.com"
-app.config['MAIL_PASSWORD'] = "wpduynivetwacocf"
-app.config['MAIL_DEFAULT_SENDER'] = "ctfadvert@gmail.com"
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
+app.config['SLACK_API_TOKEN'] = "xoxp-435425890822-433964078291-433965118419-69f122955e495933c4ff962ffa20fd41"
+sc = SlackClient(app.config['SLACK_API_TOKEN'])
+
 
 
 @app.route('/',methods=['GET','POST'])
@@ -66,11 +62,13 @@ def home():
 
     elif request.method == 'POST':
         body = "Phone Number: {} ; E-mail: {} ; Message: {}".format(request.form.get('phone'),request.form.get('e-mail'),request.form.get('message'))
-        msg = Message("Someone is trying to reach you through your website!!!",recipients=["harsh3@umbc.edu"])
-        msg.body = body
-        mail.send(msg)
 
-       
+        sc.api_call(
+        "chat.postMessage",
+        channel="contactme",
+        text=body
+        )
+
         user_id = request.cookies.get('user_id')
 
         if user_id:
