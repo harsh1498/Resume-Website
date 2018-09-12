@@ -1,15 +1,10 @@
 from flask import Flask, render_template, request, make_response
-from slackclient import SlackClient
+import requests
 import json
 import sqlite3
 import uuid
 
 app = Flask(__name__)
-
-app.config['SLACK_API_TOKEN'] = "xoxp-435425890822-433964078291-433965118419-69f122955e495933c4ff962ffa20fd41"
-sc = SlackClient(app.config['SLACK_API_TOKEN'])
-
-
 
 @app.route('/',methods=['GET','POST'])
 def home():
@@ -63,11 +58,8 @@ def home():
     elif request.method == 'POST':
         body = "Phone Number: {} ; E-mail: {} ; Message: {}".format(request.form.get('phone'),request.form.get('e-mail'),request.form.get('message'))
 
-        sc.api_call(
-        "chat.postMessage",
-        channel="contactme",
-        text=body
-        )
+        requests.post("https://hooks.slack.com/services/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",json={"text":body})
+
 
         user_id = request.cookies.get('user_id')
 
