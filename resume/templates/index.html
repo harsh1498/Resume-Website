@@ -21,24 +21,24 @@
                     <ul class="uk-navbar-nav">
 
                         <li>
-                            <a href="#About">About Me</a>
+                            <a href="#About" uk-scroll>About Me</a>
                         </li>
                         <li>
-                            <a href="#Programming">Skills</a>
+                            <a href="#Programming" uk-scroll>Skills</a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     {% for index in range(context['skill_types']|length) %}
                                     <strong>
                                         <li class="uk-nav-header">
 
-                                            <a href="#{{ context['skill_types'][index]['name'] }}">{{ context['skill_types'][index]['name'] }}</a>
+                                            <a href="#{{ context['skill_types'][index]['name'] }}" uk-scroll>{{ context['skill_types'][index]['name'] }}</a>
 
                                         </li>
                                     </strong>
 
                                     {% for skill in context['skill_types'][index]['skills'] %}
                                     <li>
-                                        <a href="#{{ skill['name'] }}">{{ skill['name'] }}</a>
+                                        <a href="#{{ skill['name'] }}" uk-scroll>{{ skill['name'] }}</a>
                                     </li>
                                     {% endfor %} {% endfor %}
 
@@ -46,7 +46,7 @@
                             </div>
                         </li>
                         <li>
-                            <a href="#Contact_Me">Contact Me</a>
+                            <a href="#Contact_Me" uk-scroll>Contact Me</a>
                         </li>
                     </ul>
 
@@ -56,6 +56,7 @@
         </div>
     </div>
 
+    <a href="" class="uk-position-bottom-right uk-position-fixed uk-background-secondary " uk-totop uk-scroll></a>
 
     <div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: url('static/images/clean-header.jpg');">
         <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 1,0.5; y:
