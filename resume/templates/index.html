@@ -24,7 +24,7 @@
                             <a href="#About" uk-scroll>About Me</a>
                         </li>
                         <li>
-                            <a href="#Programming" uk-scroll>Skills</a>
+                            <a>Skills</a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     {% for index in range(context['skill_types']|length) %}
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <a href="" class="uk-position-bottom-right uk-position-fixed uk-background-secondary " uk-totop uk-scroll></a>
+    <a href="" class="uk-position-bottom-right uk-position-fixed uk-background-secondary" uk-totop uk-scroll></a>
 
     <div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg, blue , black);">
         <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 1,0.5; y:
@@ -135,7 +135,7 @@
                                     <div class="uk-background-cover" style="background-image: linear-gradient(-45deg,{{skill['gradient-to']}},{{skill['gradient-from']}});" uk-height-viewport></div>
                                     <div class="uk-padding-large">
                                         <h1>{{s['name']}}</h1>
-                                        <iframe src="{{s['example']}}" frameborder="0"></iframe>
+                                        <p class="uk-text-danger">Examples to Come SOON!!!</p>
                                     </div>
                                 </div>
                             </div>

@@ -7,10 +7,6 @@ import html
 
 app = Flask(__name__)
 
-@app.route('/test',methods=['GET','POST'])
-def test():
-    return "hello"
-
 
 @app.route('/',methods=['GET','POST'])
 def home():

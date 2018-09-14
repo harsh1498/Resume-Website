@@ -48,10 +48,10 @@
             "description-a": "I used git to manage my projects and homeworks that were due for Computer Science 331 (Principles of programming languages).",
             "description-rw": "I use git to manage most of my project at my internships. We documented and followed a git workflow, made multiple repositories and branches, solved merge conflicts and managed git commits and merges.",
             "image": "static/images/git",
-            "example": "/test"
+            "example": ""
           },
           {
-            "name": "Virtual Machines",
+            "name": "Virtualization",
             "description-a": "In Computer Science 421 (Operating Systems), we will be using virtualbox to create a vuirtual machine to write and test kernel modules in.",
             "description-rw": "I have made countless VMs use VirtualBox that do anything from act as my dev enviornment to act as a node in a mock network configuration. I have done networking between VMs, and setup guest editions and shared folders along with other virtualbox configurations. I have also exported virtual machines to .ova and .vhd",
             "image": "static/images/Virtualbox.png",
@@ -67,12 +67,12 @@
         ]
       },
       {
-        "name": "Misc",
+        "name": "Interpersonal Skills",
         "gradient-from": "pink",
         "gradient-to": "red",
         "skills": [
           {
-            "name": "Presentation Creation",
+            "name": "Presentations",
             "description-a": "I have made an abudance of presentations for classes with topics ranging from book reports to group project final presentations. I often use Google Slides or Microsoft Powerpoint to make visually stuning presentations. I have watched TED talks on how to make presentations meaningful yet consice and vusially apealing",
             "description-rw": "I have made presentations for all final projects for summer internships and presented them to high ranking members of the company (including the CEO).",
             "image": "static/images/presentation.jpg",
