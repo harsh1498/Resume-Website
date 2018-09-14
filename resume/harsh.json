@@ -12,64 +12,78 @@
     "skill_types": [
       {
         "name": "Programming",
+        "gradient-from": "blue",
+        "gradient-to": "purple",
         "skills": [
           {
             "name": "Python",
             "description-a": "I started learning Python in Computer Science 201 (Introduction to Computer Science). We learned about the different types of loops, recursion, general control structures and proper coding standards",
             "description-rw": "I use Python at my internship at FedData to create web applications to data parsing scripts. I have even been TA-ing for CMSC 201 for 2 semesters now and I am going into my third semester as a teaching assistant.",
-            "image": "static/images/python-logo.svg"
+            "image": "static/images/python-logo.svg",
+            "example":""
           },
           {
             "name": "C++/C",
             "description-a": "I have used C++ in multiple computer science courses ranging from Computer Science 202 (Introduction to Computer Science 2) to Computer Science 341 (Data Structures). It is used in many of our courses at UMBC and I have created many data structures such as square lists, binary trees, and hash tables using C++. I also have used C for many classes including Computer Science 313 (C and Assembly) and will be using it more in Computer Science 421 (Operating Systems) and Computer Science 411 (Architecture)",
             "description-rw": "I have made a simple game with intentional security vulnerabilities for a CTF.",
-            "image": "static/images/cpp_logo.png"
+            "image": "static/images/cpp_logo.png",
+            "example": ""
           },
           {
             "name": "Assembly",
             "description-a": "I have used assembly in Computer Science 313 (C and Assembly) in i386 architecture.",
             "description-rw": "I have also parsed the disassembly of programs for a Capture the Flag (CTF) event I par-took in.",
-            "image": "static/images/assembly.jpg"
+            "image": "static/images/assembly.jpg",
+            "example": ""
           }
         ]
       },
       {
         "name": "Software",
+        "gradient-from": "purple",
+        "gradient-to": "pink",
         "skills": [
           {
             "name": "Git",
             "description-a": "I used git to manage my projects and homeworks that were due for Computer Science 331 (Principles of programming languages).",
             "description-rw": "I use git to manage most of my project at my internships. We documented and followed a git workflow, made multiple repositories and branches, solved merge conflicts and managed git commits and merges.",
-            "image": "static/images/git"
+            "image": "static/images/git",
+            "example": "/test"
           },
           {
             "name": "Virtual Machines",
             "description-a": "In Computer Science 421 (Operating Systems), we will be using virtualbox to create a vuirtual machine to write and test kernel modules in.",
             "description-rw": "I have made countless VMs use VirtualBox that do anything from act as my dev enviornment to act as a node in a mock network configuration. I have done networking between VMs, and setup guest editions and shared folders along with other virtualbox configurations. I have also exported virtual machines to .ova and .vhd",
-            "image": "static/images/Virtualbox.png"
+            "image": "static/images/Virtualbox.png",
+            "example":""
           },
           {
             "name": "Docker",
             "description-a": "I have yet to have a class that had me use docker.",
             "description-rw": "I have used Docker and Docker Compose to containerize applications and make the application deployment repeatable. I have configured volumes to have data stored outside the docker app and setup communication between docker applications.",
-            "image": "static/images/docker.png"
+            "image": "static/images/docker.png",
+            "example":""
           }
         ]
       },
       {
         "name": "Misc",
+        "gradient-from": "pink",
+        "gradient-to": "red",
         "skills": [
           {
             "name": "Presentation Creation",
             "description-a": "I have made an abudance of presentations for classes with topics ranging from book reports to group project final presentations. I often use Google Slides or Microsoft Powerpoint to make visually stuning presentations. I have watched TED talks on how to make presentations meaningful yet consice and vusially apealing",
             "description-rw": "I have made presentations for all final projects for summer internships and presented them to high ranking members of the company (including the CEO).",
-            "image": "static/images/presentation.jpg"
+            "image": "static/images/presentation.jpg",
+            "example":""
           },
           {
             "name": "Teaching",
             "description-a": "I have been a TA for CMSC 201 for 2 semesters and have held labs with thirty students, graded assignments, and answered questions during office hours.",
             "description-rw": "I have volunteered to help at a summer camp where we took care of childern during the day, taught them a little bit of math and reading. We helped them grow and have a productive summer whilst having fun at the same time.",
-            "image": "static/images/teaching.png"
+            "image": "static/images/teaching.png",
+            "example":""
           }
         ]
       }

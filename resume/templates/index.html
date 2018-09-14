@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="uk-text-center uk-background-muted">
 
 <head>
     <title>{{ context['name'] }}</title>
@@ -12,7 +12,7 @@
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body>
+<body class="uk-text-center uk-background-muted">
     <div class="uk-position-relative">
         <div class="uk-position-top">
 
@@ -58,7 +58,7 @@
 
     <a href="" class="uk-position-bottom-right uk-position-fixed uk-background-secondary " uk-totop uk-scroll></a>
 
-    <div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: url('static/images/clean-header.jpg');">
+    <div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg, blue , black);">
         <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 1,0.5; y:
 	0,100; viewport: 1 ">{{context['name']}}</h1>
     </div>
@@ -66,15 +66,13 @@
     <div id="About" class="uk-section uk-section-muted uk-text-left">
         <div class="uk-container">
 
-            <h3>About Me</h3>
-
-
             <div>
-                <div class="uk-card uk-card-secondary uk-card-body">
-                    <h3 class="uk-card-title">Elevator Pitch</h3>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3>About Me</h3>
                     <p>{{ context['elevator_pitch'] }}</p>
                 </div>
             </div>
+            <br>
             <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
                 <div>
                     <div class="uk-card uk-card-default uk-card-body">
@@ -87,7 +85,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="uk-card uk-card-secondary uk-card-body">
+                    <div class="uk-card uk-card-default uk-card-body">
                         <h3 class="uk-card-title">Current Job</h3>
                         {% for key,value in context['current_title'].items() %}
                         <p>
@@ -101,8 +99,8 @@
 
 
     </div>
-    {% for skill in context['skill_types'] %} {% set img = skill['name'] + '.jpg' %}
-    <div id="Programming" class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: url('static/images/{{ img }}'); ">
+    {% for skill in context['skill_types'] %} {% set img = skill['name'] %}
+    <div id="Programming" class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg,{{skill['gradient-to']}},{{skill['gradient-from']}});">
 
         <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
         100,0; viewport: 0.5 ">{{ skill['name'] }}</h1>
@@ -115,18 +113,33 @@
         <div class="uk-section uk-section-muted ">
             <div class="uk-container ">
 
-                <div class="uk-grid uk-child-width-1-3@m " uk-grid>
-                    <div>
+                <div class="uk-child-width-1-3@m uk-grid-small" uk-grid>
+                    <div class="uk-card uk-card-default uk-card-body">
                         <img class="uk-position-center uk-position-relative" src="{{ s['image'] }}" style="max-width:200px">
                     </div>
-                    <div>
-                        <h3 class="uk-text-center">Academic Experince</h3>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">{{s['name']}}</h3>
+                        <h5 class="uk-text-center">Academic Experince</h5>
                         <p class="uk-text-justify">{{ s['description-a'] }}</p>
+                        <h5 class="uk-text-center">Real World Experince</h5>
+                        <p class="uk-text-justify">{{ s['description-rw'] }}</p>
                     </div>
 
-                    <div>
-                        <h3 class="uk-text-center">Real World Experince</h3>
-                        <p class="uk-text-justify">{{ s['description-rw'] }}</p>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <a class="uk-button uk-button-default uk-position-relative uk-position-center" href="#{{s['name']}}" uk-toggle>Open</a>
+
+                        <div id="{{s['name']}}" class="uk-modal-full" uk-modal>
+                            <div class="uk-modal-dialog">
+                                <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                                <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+                                    <div class="uk-background-cover" style="background-image: linear-gradient(-45deg,{{skill['gradient-to']}},{{skill['gradient-from']}});" uk-height-viewport></div>
+                                    <div class="uk-padding-large">
+                                        <h1>{{s['name']}}</h1>
+                                        <iframe src="{{s['example']}}" frameborder="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -137,33 +150,35 @@
 
 
 
-    <div id="Contact_Me" class="uk-height-large uk-background-cover uk-dark uk-flex uk-flex-top " style="background-image:
-        url( 'static/images/Contact.jpg'); ">
+    <div id="Contact_Me" class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top " style="background-image: linear-gradient(-45deg, black, red);">
 
         <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
         100,0; viewport: 0.5 ">Contact Me</h1>
 
     </div>
-    <div class="uk-section uk-background-secondary ">
+    <div class="uk-section uk-background-muted ">
         <form class="uk-text-center " method='POST'>
-
             <div class="uk-margin ">
                 <div class="uk-inline ">
-                    <span class="uk-form-icon " uk-icon="icon: receiver "></span>
-                    <input class="uk-input " name="phone" type="tel ">
+                    <input class="uk-input" placeholder="Full Name" name="name" type="text">
                 </div>
             </div>
 
             <div class="uk-margin ">
                 <div class="uk-inline ">
-                    <span class="uk-form-icon " uk-icon="icon: mail "></span>
-                    <input class="uk-input " name="e-mail" type="email ">
+                    <input class="uk-input" placeholder="555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" type="tel">
                 </div>
             </div>
 
             <div class="uk-margin ">
                 <div class="uk-inline ">
-                    <textarea class="uk-textarea " rows="5" placeholder="Hey Harsh ..." name="message"></textarea>
+                    <input class="uk-input" placeholder="my_name@gmail.com" name="e-mail" type="email">
+                </div>
+            </div>
+
+            <div class="uk-margin ">
+                <div class="uk-inline ">
+                    <textarea class="uk-textarea" rows="5" placeholder="Hey Harsh ..." name="message"></textarea>
                 </div>
             </div>
             <div class="uk-margin ">
@@ -175,11 +190,8 @@
     </div>
 </body>
 <br>
-<footer class="uk-text-center">
-    <p>Posted by: Harsh Patel</p>
-    <p>Contact information:
-        <a href="mailto:harsh3@umbc.edu ">
-            harsh3@umbc.edu</a>.</p>
+<footer class="uk-text-center uk-background-muted">
+    <p>Made with ☕ by Harsh Patel</p>
 </footer>
 
 </html>
