@@ -23,7 +23,7 @@
             "example":""
           },
           {
-            "name": "C++/C",
+            "name": "C-Cpp",
             "description-a": "I have used C++ in multiple computer science courses ranging from Computer Science 202 (Introduction to Computer Science 2) to Computer Science 341 (Data Structures). It is used in many of our courses at UMBC and I have created many data structures such as square lists, binary trees, and hash tables using C++. I also have used C for many classes including Computer Science 313 (C and Assembly) and will be using it more in Computer Science 421 (Operating Systems) and Computer Science 411 (Architecture)",
             "description-rw": "I have made a simple game with intentional security vulnerabilities for a CTF.",
             "image": "static/images/cpp_logo.png",
