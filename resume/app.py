@@ -5,97 +5,167 @@ import sqlite3
 import uuid
 import html
 
+DATABASE_FILE_NAME = "app.db"
+
 app = Flask(__name__)
 
+CONTEXT = {}
 
-@app.route('/',methods=['GET','POST'])
-def home():
-    harsh = open('harsh.json','r')
-    context = json.loads(harsh.read())
-    harsh.close()
+def get_visits(user_id):
+    conn = sqlite3.connect(DATABASE_FILE_NAME)
+    c = conn.cursor()
+    c.execute('SELECT value FROM counts where key="visits" and user_cookie="{}"'.format(user_id))
+    visits = c.fetchone()
+    conn.commit()
+    conn.close()
+    if visits != None:
+        visits = int(visits[0])
+    return visits
 
+def update_user(name,email,phone,user_id,message):
+    conn = sqlite3.connect(DATABASE_FILE_NAME)
+    c = conn.cursor()
+    c.execute('UPDATE user set name="{}",email="{}",phone="{}" where cookie="{}"'.format(name,email,phone,user_id))
+    c.execute('INSERT INTO message (user_cookie,message) VALUES("{}","{}")'.format(user_id,message))
+    conn.commit()
+    conn.close()
+
+def new_user(name,email,phone,user_id):
+    conn = sqlite3.connect(DATABASE_FILE_NAME)
+    c = conn.cursor()
+    c.execute('INSERT INTO user (name,email,phone,cookie) VALUES("{}","{}",{},"{}") '.format(name,email,phone,user_id))
+    c.execute('INSERT INTO counts (key,value,user_cookie) values("{}",{},"{}")'.format("visits",1,user_id))
+    conn.commit()
+    conn.close()
+
+def new_anon_user(user_id):
+    conn = sqlite3.connect(DATABASE_FILE_NAME)
+    c = conn.cursor()
+    c.execute('INSERT INTO user (name,email,phone,cookie) VALUES("{}","{}",{},"{}") '.format('ANON','ANON',0,user_id))
+    c.execute('INSERT INTO counts (key,value,user_cookie) values("{}",{},"{}")'.format("visits",1,user_id))
+    conn.commit()
+    conn.close()
+
+
+def store_metadata(remote_addr,user_agent,user_id):
+    conn = sqlite3.connect(DATABASE_FILE_NAME)
+    c = conn.cursor()
+    c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("remote_addr",remote_addr,user_id))
+    c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("user_agent",user_agent,user_id))
+    conn.commit()
+    conn.close()
+
+def collect_metadata():
     remote_addr = html.escape(str(request.remote_addr))
     user_agent = html.escape(str(request.user_agent))
-    
+    return remote_addr, user_agent
+
+@app.route('/',methods=['GET','POST'])
+def index():
+    # Get User's Metadata
+    remote_addr,user_agent = collect_metadata()
+
+    # If the user makes a get request
     if request.method == 'GET':
-        if not request.cookies.get('user_id'):
+        # Try to get the user's cookie
+        user_id = request.cookies.get('user_id')
+
+        # And the user does not have a cookie defined
+        if not user_id:
+
+            # Define a new user cookie
             user_id = html.escape(str(uuid.uuid4().hex))
-            conn = sqlite3.connect('app.db')
-            c = conn.cursor()
-            c.execute('INSERT INTO user (name,email,phone,cookie) VALUES("{}","{}",{},"{}") '.format('ANON','ANON',0,user_id))
-            c.execute('INSERT INTO counts (key,value,user_cookie) values("{}",{},"{}")'.format("visits",1,user_id))
-            c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("remote_addr",remote_addr,user_id))
-            c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("user_agent",user_agent,user_id))
-            conn.commit()
-            conn.close()
-            resp = make_response(render_template('index.html',context=context[0]))
+
+            # Insert a new ANON user into the database
+            new_anon_user(user_id)
+
+            # Updates store ANON user's metadata
+            store_metadata(remote_addr,user_agent,user_id)
+
+            # Generate a response object 
+            resp = make_response(render_template('index.html',context=CONTEXT[0]))
             resp.set_cookie('user_id',user_id)
 
         else:
-            conn = sqlite3.connect('app.db')
-            c = conn.cursor()
+            # Get user's cookie
             user_id = html.escape(str(request.cookies.get('user_id')))
-            c.execute('SELECT value FROM counts where key="visits" and user_cookie="{}"'.format(user_id))
-            visits = c.fetchone()
-            if visits != None:
-                visits = int(visits[0])
-            else:
+
+            # Get visits
+            visits = get_visits(user_id)
+            
+            if visits == None:
+                # Define a new user cookie
                 user_id = html.escape(str(uuid.uuid4().hex))
-                conn = sqlite3.connect('app.db')
+
+                # Insert a new ANON user into the database
+                new_anon_user(user_id)
+
+                # Updates store ANON user's metadata
+                store_metadata(remote_addr,user_agent,user_id)
+
+                # Make a response object, set cookie, and redirect
+                resp = make_response(render_template('index.html',context=CONTEXT[0]))
+                resp.set_cookie('user_id',user_id)
+
+            else:
+                # Update visits key
+                conn = sqlite3.connect(DATABASE_FILE_NAME)
                 c = conn.cursor()
-                c.execute('INSERT INTO user (name,email,phone,cookie) VALUES("{}","{}",{},"{}") '.format('ANON','ANON',0,user_id))
-                c.execute('INSERT INTO counts (key,value,user_cookie) values("{}",{},"{}")'.format("visits",1,user_id))
-                c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("remote_addr",remote_addr,user_id))
-                c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("user_agent",user_agent,user_id))
+                c.execute('UPDATE counts set value={} where key="visits" and user_cookie="{}"'.format(visits+1,user_id)) 
                 conn.commit()
                 conn.close()
-                resp = make_response(render_template('index.html',context=context[0]))
-                resp.set_cookie('user_id',user_id)
-                return resp
-
-            c.execute('UPDATE counts set value={} where key="visits" and user_cookie="{}"'.format(visits+1,user_id))
-            c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("remote_addr",remote_addr,user_id))
-            c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("user_agent",user_agent,user_id))
-            conn.commit()
-            conn.close()
-            resp = make_response(render_template('index.html',context=context[0]))
+                
+                # Updates store ANON user's metadata
+                store_metadata(remote_addr,user_agent,user_id)
+                
+                # Create the response object
+                resp = make_response(render_template('index.html',context=CONTEXT[0]))
 
         return resp
 
     elif request.method == 'POST':
+        # Get data from form
         name = html.escape(str(request.form.get('name')))
         phone = html.escape(str(request.form.get('phone')))
         email = html.escape(str(request.form.get('e-mail')))
         message = html.escape(str(request.form.get('message')))
  
-        body = "Name: {} ; Phone Number: {} ; E-mail: {} ; Message: {}".format(name,phone,email,message)
+        # Get their user cookie
+        user_id = html.escape(str(request.cookies.get('user_id')))
 
+        # Get visits for user
+        visits = get_visits(user_id)
+
+        # Construct a body for the message
+        body = "Name: {} ; Visits:{} ; Phone Number: {} ; E-mail: {} ; Message: {}".format(name,visits,phone,email,message)
+
+        # Post the message to slack
         requests.post("https://hooks.slack.com/services/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",json={"text":body})
 
 
-        user_id = html.escape(str(request.cookies.get('user_id')))
-
         if user_id:
-            conn = sqlite3.connect('app.db')
-            c = conn.cursor()
-            c.execute('UPDATE user set name="{}",email="{}",phone="{}" where cookie="{}"'.format(name,email,phone,user_id))
-            c.execute('INSERT INTO message (user_cookie,message) VALUES("{}","{}")'.format(user_id,message))
-            conn.commit()
-            conn.close()
+            # Update existign user
+            update_user(name,email,phone,user_id,message)
+            
+            # Redirect to index, as a get request
             resp = make_response(redirect('/'))
 
         else:
+            # Generate user_id
             user_id = html.escape(str(uuid.uuid4().hex))
-            conn = sqlite3.connect('app.db')
-            c = conn.cursor()
-            c.execute('INSERT INTO user (name,email,phone,cookie) VALUES("{}","{}",{},"{}") '.format(name,email,phone,user_id))
-            c.execute('INSERT INTO counts (key,value,user_cookie) values("{}",{},"{}")'.format("visits",1,user_id))
-            conn.commit()
-            conn.close()
+
+            # Generate new user
+            new_user(name,email,phone,user_id)
+
+            # Make a response object, set cookie
             resp = make_response(redirect('/'))
             resp.set_cookie('user_id',user_id)
-
+        
+        # Return response
         return resp
 
 if __name__ == '__main__':
+    harsh = open('harsh.json','r')
+    CONTEXT = json.loads(harsh.read())
+    harsh.close()
     app.run(debug=True,host="0.0.0.0", port=80)
