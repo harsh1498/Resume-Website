@@ -128,10 +128,10 @@
                     </div>
                     <div class="uk-card uk-card-default uk-card-body">
                         <h3 class="uk-card-title">{{s['name']}}</h3>
-                        <h5 class="uk-text-center">Academic Experince</h5>
-                        <p class="uk-text-justify">{{ s['description-a'] }}</p>
-                        <h5 class="uk-text-center">Real World Experince</h5>
-                        <p class="uk-text-justify">{{ s['description-rw'] }}</p>
+                        {% for k,v in s['descriptions'].items() %}
+                        <h5 class="uk-text-center">{{k}}</h5>
+                        <p class="uk-text-justify">{{v}}</p>
+                        {% endfor  %}
                     </div>
                     {% if s['example-type'] != ''  %}
                     <div class="uk-card uk-card-default uk-card-body">

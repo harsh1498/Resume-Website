@@ -10,6 +10,7 @@ DATABASE_FILE_NAME = "app.db"
 app = Flask(__name__)
 
 CONTEXT = {}
+    
 
 def get_visits(user_id):
     conn = sqlite3.connect(DATABASE_FILE_NAME)
@@ -50,8 +51,18 @@ def new_anon_user(user_id):
 def store_metadata(remote_addr,user_agent,user_id):
     conn = sqlite3.connect(DATABASE_FILE_NAME)
     c = conn.cursor()
-    c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("remote_addr",remote_addr,user_id))
-    c.execute('INSERT INTO metadata (key,value,user_cookie) values("{}","{}","{}")'.format("user_agent",user_agent,user_id))
+    c.execute('SELECT user_cookie from metadata where key="visits_from_{}" and value="{}" and user_cookie="{}"'.format(user_agent,user_agent,user_id))
+    results = c.fetchall()
+    if not results:
+        c.execute('INSERT INTO metadata (key,value,user_cookie) values("visits_from_{}","{}","{}")'.format(user_agent,user_agent,user_id))
+    else:
+        c.execute('SELECT value from counts where key="visits_from_{}" and user_cookie="{}"'.format(user_agent,user_id))
+        visits = c.fetchone()
+        if not visits:
+            c.execute('INSERT INTO counts (key,value,user_cookie) VALUES("visits_from_{}","{}","{}")'.format(user_agent,1,user_id))
+        else:
+            c.execute('UPDATE counts set value={} where user_cookie="{}" and key="visits_from_{}"'.format(int(visits[0])+1,user_id,user_agent))
+
     conn.commit()
     conn.close()
 
@@ -62,6 +73,8 @@ def collect_metadata():
 
 @app.route('/',methods=['GET','POST'])
 def index():
+
+
     # Get User's Metadata
     remote_addr,user_agent = collect_metadata()
 
@@ -118,8 +131,13 @@ def index():
                 # Updates store ANON user's metadata
                 store_metadata(remote_addr,user_agent,user_id)
                 
+                if request.args.get('success') and request.args.get('success') == user_id :
+                    feedback = {"message":"I'll get back to you ASAP","status":"success"}
+                else:
+                    feedback = None
+
                 # Create the response object
-                resp = make_response(render_template('index.html',context=CONTEXT[0]))
+                resp = make_response(render_template('index.html',context=CONTEXT[0],feedback=feedback))
 
         return resp
 
@@ -140,15 +158,17 @@ def index():
         body = "Name: {} ; Visits:{} ; Phone Number: {} ; E-mail: {} ; Message: {}".format(name,visits,phone,email,message)
 
         # Post the message to slack
-        requests.post("https://hooks.slack.com/services/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",json={"text":body})
+        #requests.post("https://hooks.slack.com/services/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",json={"text":body})
 
 
         if user_id:
             # Update existign user
             update_user(name,email,phone,user_id,message)
             
+            url = '/?success='+user_id
+
             # Redirect to index, as a get request
-            resp = make_response(redirect('/'))
+            resp = make_response(redirect(url))
 
         else:
             # Generate user_id
@@ -157,8 +177,10 @@ def index():
             # Generate new user
             new_user(name,email,phone,user_id)
 
+            url = '/?success='+user_id
+
             # Make a response object, set cookie
-            resp = make_response(redirect('/'))
+            resp = make_response(redirect(url))
             resp.set_cookie('user_id',user_id)
         
         # Return response
