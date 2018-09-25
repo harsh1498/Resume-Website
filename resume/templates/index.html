@@ -13,6 +13,12 @@
 </head>
 
 <body class="uk-text-center uk-background-muted">
+    {% if feedback %}
+    <script>
+    UIkit.notification("{{feedback['message']}}","{{feedback['status']}}"); 
+    </script>
+ 
+    {% endif %}
     <div class="uk-position-relative">
         <div class="uk-position-top">
 
@@ -112,8 +118,11 @@
     <div id="{{ s['id'] }}" class="uk-section-default ">
         <div class="uk-section uk-section-muted ">
             <div class="uk-container ">
-
+                {% if s['example-type'] != '' %}
                 <div class="uk-child-width-1-3@m uk-grid-small" uk-grid>
+                {% else %}
+                <div class="uk-child-width-1-2@m uk-grid-small" uk-grid>
+                {% endif %}
                     <div class="uk-card uk-card-default uk-card-body">
                         <img class="uk-position-center uk-position-relative" src="{{ s['image'] }}" style="max-width:200px">
                     </div>
@@ -124,7 +133,7 @@
                         <h5 class="uk-text-center">Real World Experince</h5>
                         <p class="uk-text-justify">{{ s['description-rw'] }}</p>
                     </div>
-
+                    {% if s['example-type'] != ''  %}
                     <div class="uk-card uk-card-default uk-card-body">
                         <a class="uk-button uk-button-default
                             uk-position-relative uk-position-center"
@@ -133,16 +142,24 @@
                         <div id="{{s['id']}}example" class="uk-modal-full" uk-modal>
                             <div class="uk-modal-dialog">
                                 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
-                                <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
-                                    <div class="uk-background-cover" style="background-image: linear-gradient(-45deg,{{skill['gradient-to']}},{{skill['gradient-from']}});" uk-height-viewport></div>
+                                <div class="uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
                                     <div class="uk-padding-large">
                                         <h1>{{s['name']}}</h1>
+                                        {% if s['example-type'] == "code" %}
+                                        
+                                            <script src={{s['gist-url']}}></script>
+                                    
+                                        </code>
+                                        {% else %}
                                         <p class="uk-text-danger">Examples to Come SOON!!!</p>
+                                        {% endif %}
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% endif  %}
                 </div>
 
             </div>
