@@ -1,12 +1,12 @@
 [
   {
     "name": "Harsh Patel",
-    "elevator_pitch":"I am an undergraduate student at University of Maryland, Baltimore County majoring in Computer Science. I have been working in the industry for about 2+ years dealing with technologies ranging from wordpress, HTML, CSS and frontend webframeworks to Flask, Nginx, OpenVPN, Docker and other backend technologies. I have attended multiple hackathons and partook in the Google CTF event. I am also involved in few technical clubs on campus.",
+    "elevator_pitch": "I am an undergraduate student at the University of Maryland, Baltimore County majoring in Computer Science. I have been working in the industry for about 2+ years dealing with technologies ranging from Wordpress, HTML, CSS and front-end Web Frameworks to Flask, Nginx, OpenVPN, Docker and other backend technologies. I have attended multiple hackathons and par-took in the Google CTF event. I am also involved in few technical clubs on campus. It is due to these skills and experiences that I know I am a strong candidate for technical internships. I have a significant amount of real world experience that unfortunately, most students don't get until their senior year or even after graduation. I also have a strong skill in explaining technical topics in a concise and comphreadable manner. Most importantly, I am very passionate about my major and take active steps to stay on top of current news related to the industry. Would you want to hire someone with no passion for their work? Hire me and you will get an experinced, well educated, diverse, and passionate employee.",
     "current_title": {
       "Name": "Technology Intern",
       "Company": "FedData",
-      "Description": "I develop software",
-      "Start": "Jul, 2017",
+      "Description": "I develop programs and systems using technologies such as OpenVPN, Flask,Nginx, Django, Python, VirtualBox and many other technologies.",
+      "Start": "July, 2017",
       "End": "Present"
     },
     "skill_types": [
@@ -17,36 +17,35 @@
         "skills": [
           {
             "name": "Python",
-            "id":"python",
-            "descriptions":{
-            "Acedemic Description": "I started learning Python in Computer Science 201 (Introduction to Computer Science). We learned about the different types of loops, recursion, general control structures and proper coding standards",
-            "Real World Description": "I use Python at my internship at FedData to create web applications to data parsing scripts. I have even been TA-ing for CMSC 201 for 2 semesters now and I am going into my third semester as a teaching assistant."
+            "id": "python",
+            "descriptions": {
+              "Academic Description": "I started learning Python in Computer Science 201 (Introduction to Computer Science). We learned about different types of loops, recursion, general control structures, and proper coding standards.",
+              "Real World Description": "I have used Python during my internship at FedData to create a wide range of programs ranging from web applications to data parsing scripts. I am also an Undergraduate Teaching Assistant for CMSC 201 going into my third semester this year."
             },
             "image": "static/images/python-logo.svg",
-            "gist-url":"https://gist.github.com/harsh1498/a7ccafb41ad13b9fbb463a0fc4245398.js",
-            "example-type":"code"
+            "gist-url": "https://gist.github.com/harsh1498/a7ccafb41ad13b9fbb463a0fc4245398.js",
+            "example-type": "code"
           },
           {
             "name": "C/C++",
-            "id":"c-cpp",
-            "descriptions":{
-            "Acedemic Description": "I have used C++ in multiple computer science courses ranging from Computer Science 202 (Introduction to Computer Science 2) to Computer Science 341 (Data Structures). It is used in many of our courses at UMBC and I have created many data structures such as square lists, binary trees, and hash tables using C++. I also have used C for many classes including Computer Science 313 (C and Assembly) and will be using it more in Computer Science 421 (Operating Systems) and Computer Science 411 (Architecture)",
-            "Real World Description": "I have made a simple game with intentional security vulnerabilities for a CTF."
+            "id": "c-cpp",
+            "descriptions": {
+              "Academic Description": "I have used C++ in multiple computer science courses ranging from Computer Science 202 (Introduction to Computer Science 2) to Computer Science 341 (Data Structures). It is used in many of our courses at UMBC and I have created many data structures such as square lists, binary trees, and hash tables using C++ in our Data Structures Course. I also have used C for many classes, including Computer Science 313 (C and Assembly) and will be using it more in Computer Science 421 (Operating Systems) this semester."
             },
             "image": "static/images/cpp_logo.png",
             "gist-url": "https://gist.github.com/harsh1498/880833a4ad1aa4d22bf20ab1495a836f.js",
-            "example-type":"code"
+            "example-type": "code"
           },
           {
             "name": "Assembly",
-            "id":"asm",
-            "descriptions":{
-            "Acedemic Description": "I have used assembly in Computer Science 313 (C and Assembly) in i386 architecture.",
-            "Real World Description": "I have also parsed the disassembly of programs for a Capture the Flag (CTF) event I par-took in."
+            "id": "asm",
+            "descriptions": {
+              "Acedemic Description": "I have used assembly in Computer Science 313 (C and Assembly) in i386 architecture. We covered different instructions such as bitwise operations, shifts, stack management and properly managing the instruction pointer etc. I will also be using the MIPS ISA and writing more assembly in the Computer Science 411 (Architecture) course which I am currently in.",
+              "Real World Description": "I have also parsed the disassembly of programs for a Capture the Flag (CTF) event I par-took in. We made use of programs such as Cutter, and Radare2 to parse the assembly and tried to look through the assembly and reverse engineer the Java program."
             },
             "image": "static/images/assembly.jpg",
             "example": "",
-            "example-type":""
+            "example-type": ""
           }
         ]
       },
@@ -57,36 +56,35 @@
         "skills": [
           {
             "name": "Git",
-            "id":"git",
-            "descriptions":{
-            "Acedemic Description":"I used git to manage my projects and homeworks that were due for Computer Science 331 (Principles of programming languages).",
-            "Real World Description": "I use git to manage most of my project at my internships. We documented and followed a git workflow, made multiple repositories and branches, solved merge conflicts and managed git commits and merges."
+            "id": "git",
+            "descriptions": {
+              "Acedemic Description": "I used git to manage my projects and homeworks that were due for Computer Science 331 (Principles of programming languages). We are also using git to manage our projects for the Computer Science 421 (Operating Systems) course which I am taking this semester.",
+              "Real World Description": "I use git to manage most of my projects at my internship at FedData. We documented and followed a git workflow, made multiple repositories and branches, solved merge conflicts and managed git commits and merges. I have experience with working in a team using git, managing, and enforcing a proper git workflow."
             },
             "image": "static/images/git",
             "example": "",
-            "example-type":""
+            "example-type": ""
           },
           {
             "name": "Virtualization",
-            "id":"virtualization",
-            "descriptions":{
-            "Acedemic Description":"In Computer Science 421 (Operating Systems), we will be using virtualbox to create a vuirtual machine to write and test kernel modules in.",
-            "Real World Description": "I have made countless VMs use VirtualBox that do anything from act as my dev enviornment to act as a node in a mock network configuration. I have done networking between VMs, and setup guest editions and shared folders along with other virtualbox configurations. I have also exported virtual machines to .ova and .vhd"
+            "id": "virtualization",
+            "descriptions": {
+              "Acedemic Description": "In Computer Science 421 (Operating Systems), we will be using VirtualBox to create a virtual machine to write and test kernel modules in.",
+              "Real World Description": "I have made countless VMs via VirtualBox that do anything from being my development environment to acting as a node in a mock network configuration of 7+ nodes. I have done networking between VMs, along setup guest editions, shared folders, an other virtualbox configuration. I have also exported virtual machines to .ova and .vhd"
             },
             "image": "static/images/Virtualbox.png",
-            "example":"",
-            "example-type":""
+            "example": "",
+            "example-type": ""
           },
           {
             "name": "Docker",
-            "id":"docker",
-            "descriptions":{
-            "Acedemic Description": "I have yet to have a class that had me use docker.",
-            "Real World Description": "I have used Docker and Docker Compose to containerize applications and make the application deployment repeatable. I have configured volumes to have data stored outside the docker app and setup communication between docker applications."
+            "id": "docker",
+            "descriptions": {
+              "Real World Description": "I have used Docker and Docker Compose to containerize applications and make the application deployment repeatable on the cloud. I have configured volumes to have data stored outside the docker app and set up communication between docker applications. I have deployed containers to Google Cloud Platform using their compute engine services and in fact, this application itself is dockerized."
             },
             "image": "static/images/docker.png",
-            "example":"",
-            "example-type":""
+            "example": "",
+            "example-type": ""
           }
         ]
       },
@@ -97,32 +95,32 @@
         "skills": [
           {
             "name": "Presentations",
-            "id":"presentation",
-            "descriptions":{
-            "General Description": "I have made an abudance of presentations for classes with topics ranging from book reports to group project final presentations. I often use Google Slides or Microsoft Powerpoint to make visually stuning presentations. I have watched TED talks on how to make presentations meaningful yet consice and vusially apealing. I have made presentations for all final projects for summer internships and presented them to high ranking members of the company (including the CEO)."
+            "id": "presentation",
+            "descriptions": {
+              "General Description": "I have made an abundance of presentations for classes with topics ranging from book reports to group project final presentations. I often use Google Slides or Microsoft PowerPoint to make visually stunning presentations. I have watched TED talks on how to make presentations meaningful yet concise and visually apealing. I have made presentations for all final projects for summer internships and presented them to high ranking members of the company (including the CEO)."
             },
             "image": "static/images/presentation.jpg",
-            "example":"",
-            "example-type":""
+            "example": "",
+            "example-type": ""
           },
           {
             "name": "Teaching",
-            "id":"teaching",
-            "descriptions":{
-            "General Description": "I have been a TA for CMSC 201 for 2 semesters and have held labs with thirty students, graded assignments, and answered questions during office hours.I have volunteered to help at a summer camp where we took care of childern during the day, taught them a little bit of math and reading. We helped them grow and have a productive summer whilst having fun at the same time."
+            "id": "teaching",
+            "descriptions": {
+              "General Description": "I have been an Undergraduate Teaching Assistant for CMSC 201 for 2 whole semesters (continuing this semester) and have held labs with 20+ students, graded assignments, and answered questions during office hours. This position requires the ability to explain concepts in multiple different ways to different students. It requires a solid foundation on my own knowledge of introductory computer science concepts, and it requires great communication skills to properly convey important technical information to students without a technical background."
             },
             "image": "static/images/teaching.png",
-            "example":"",
-            "example-type":""
+            "example": "",
+            "example-type": ""
           }
         ]
       }
     ],
     "major": {
       "Major": "Computer Science",
-      "University": "UMBC",
-      "Start": "Aug, 2016",
-      "End": "Present"
+      "University": "University of Maryland, Balimore County",
+      "Start": "August, 2016",
+      "End": "May, 2020"
     }
   }
 ]

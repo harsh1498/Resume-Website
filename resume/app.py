@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response,redirect
+from flask import Flask, render_template, request, make_response,redirect, url_for
 import requests
 import json
 import sqlite3
@@ -70,6 +70,21 @@ def collect_metadata():
     remote_addr = html.escape(str(request.remote_addr))
     user_agent = html.escape(str(request.user_agent))
     return remote_addr, user_agent
+
+# @app.route('/success/',methods=['GET'])
+# def success():
+#     # Try to get the user's cookie
+#     user_id = request.cookies.get('user_id')
+#     print(request.args.get('success'))
+#     if request.args.get('success') and request.args.get('success') == user_id :
+#         feedback = {"message":"I'll get back to you ASAP","status":"success"}
+#     else:
+#         feedback = None
+
+#     # Return template
+#     return render_template('success.html',feedback=feedback)
+
+
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -158,14 +173,14 @@ def index():
         body = "Name: {} ; Visits:{} ; Phone Number: {} ; E-mail: {} ; Message: {}".format(name,visits,phone,email,message)
 
         # Post the message to slack
-        #requests.post("https://hooks.slack.com/services/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",json={"text":body})
+        requests.post("https://hooks.slack.com/services/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",json={"text":body})
 
 
         if user_id:
             # Update existign user
             update_user(name,email,phone,user_id,message)
             
-            url = '/?success='+user_id
+            url = '/'
 
             # Redirect to index, as a get request
             resp = make_response(redirect(url))
@@ -177,7 +192,7 @@ def index():
             # Generate new user
             new_user(name,email,phone,user_id)
 
-            url = '/?success='+user_id
+            url = '/'
 
             # Make a response object, set cookie
             resp = make_response(redirect(url))

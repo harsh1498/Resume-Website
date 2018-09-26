@@ -1,128 +1,110 @@
-<!DOCTYPE html>
-<html class="uk-text-center uk-background-muted">
+{% extends 'base.html' %} {%block title%} {%endblock%} {%block body%}
 
-<head>
-    <title>{{ context['name'] }}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="static/css/uikit.min.css" />
-    <script src="static/js/uikit.min.js"></script>
-    <script src="static/js/uikit-icons.min.js"></script>
-    <script src="static/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-</head>
 
-<body class="uk-text-center uk-background-muted">
-    {% if feedback %}
-    <script>
-    UIkit.notification("{{feedback['message']}}","{{feedback['status']}}"); 
-    </script>
- 
-    {% endif %}
-    <div class="uk-position-relative">
-        <div class="uk-position-top">
+<div class="uk-position-relative">
+    <div class="uk-position-top">
 
-            <nav class="uk-navbar-container uk-navbar-secondary" uk-navbar>
-                <div class="uk-navbar-left">
-                    <ul class="uk-navbar-nav">
+        <nav class="uk-navbar-container uk-navbar-secondary" uk-navbar>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
 
-                        <li>
-                            <a href="#About" uk-scroll>About Me</a>
-                        </li>
-                        <li>
-                            <a>Skills</a>
-                            <div class="uk-navbar-dropdown">
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    {% for index in range(context['skill_types']|length) %}
-                                    <strong>
-                                        <li class="uk-nav-header">
+                    <li>
+                        <a href="#About" uk-scroll>About Me</a>
+                    </li>
+                    <li>
+                        <a>Skills</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                {% for index in range(context['skill_types']|length) %}
+                                <strong>
+                                    <li class="uk-nav-header">
 
-                                            <a href="#{{context['skill_types'][index]['name'] }}" uk-scroll>{{ context['skill_types'][index]['name'] }}</a>
+                                        <a href="#{{context['skill_types'][index]['name'] }}" uk-scroll>{{ context['skill_types'][index]['name'] }}</a>
 
-                                        </li>
-                                    </strong>
-
-                                    {% for skill in context['skill_types'][index]['skills'] %}
-                                    <li>
-                                        <a href="#{{ skill['id'] }}" uk-scroll>{{ skill['name'] }}</a>
                                     </li>
-                                    {% endfor %} {% endfor %}
+                                </strong>
 
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#Contact_Me" uk-scroll>Contact Me</a>
-                        </li>
-                    </ul>
+                                {% for skill in context['skill_types'][index]['skills'] %}
+                                <li>
+                                    <a href="#{{ skill['id'] }}" uk-scroll>{{ skill['name'] }}</a>
+                                </li>
+                                {% endfor %} {% endfor %}
 
-                </div>
-            </nav>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#Contact_Me" uk-scroll>Contact Me</a>
+                    </li>
+                </ul>
 
-        </div>
+            </div>
+        </nav>
+
     </div>
+</div>
 
-    <a href="" class="uk-position-bottom-right uk-position-fixed uk-background-secondary" uk-totop uk-scroll></a>
+<a href="" class="uk-position-bottom-right uk-position-fixed uk-background-secondary" uk-totop uk-scroll></a>
 
-    <div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg, blue , black);">
-        <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 1,0.5; y:
+<div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg, blue , black);">
+    <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 1,0.5; y:
 	0,100; viewport: 1 ">{{context['name']}}</h1>
-    </div>
+</div>
 
-    <div id="About" class="uk-section uk-section-muted uk-text-left">
-        <div class="uk-container">
+<div id="About" class="uk-section uk-section-muted uk-text-left">
+    <div class="uk-container">
 
+        <div>
+            <div class="uk-card uk-card-default uk-card-body">
+                <h3>About Me</h3>
+                <p>{{ context['elevator_pitch'] }}</p>
+            </div>
+        </div>
+        <br>
+        <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
             <div>
                 <div class="uk-card uk-card-default uk-card-body">
-                    <h3>About Me</h3>
-                    <p>{{ context['elevator_pitch'] }}</p>
+                    <h3 class="uk-card-title">Major</h3>
+                    {% for key,value in context['major'].items() %}
+                    <p>
+                        <strong>{{ key }}:</strong> {{ value }}</p>
+                    {% endfor %}
+
                 </div>
             </div>
-            <br>
-            <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
-                <div>
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <h3 class="uk-card-title">Major</h3>
-                        {% for key,value in context['major'].items() %}
-                        <p>
-                            <strong>{{ key }}:</strong> {{ value }}</p>
-                        {% endfor %}
-
-                    </div>
-                </div>
-                <div>
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <h3 class="uk-card-title">Current Job</h3>
-                        {% for key,value in context['current_title'].items() %}
-                        <p>
-                            <strong>{{ key }}:</strong> {{ value }}</p>
-                        {% endfor %}
-                    </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">Current Job</h3>
+                    {% for key,value in context['current_title'].items() %}
+                    <p>
+                        <strong>{{ key }}:</strong> {{ value }}</p>
+                    {% endfor %}
                 </div>
             </div>
-
         </div>
 
-
     </div>
-    {% for skill in context['skill_types'] %} {% set img = skill['name'] %}
-    <div id={{skill['name']}} class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg,{{skill['gradient-to']}},{{skill['gradient-from']}});">
 
-        <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
+
+</div>
+{% for skill in context['skill_types'] %} {% set img = skill['name'] %}
+<div id={{skill[ 'name']}} class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg,{{skill['gradient-to']}},{{skill['gradient-from']}});">
+
+    <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
         100,0; viewport: 0.5 ">{{ skill['name'] }}</h1>
 
 
 
-    </div>
-    {% for s in skill['skills'] %}
-    <div id="{{ s['id'] }}" class="uk-section-default ">
-        <div class="uk-section uk-section-muted ">
-            <div class="uk-container ">
-                {% if s['example-type'] != '' %}
-                <div class="uk-child-width-1-3@m uk-grid-small" uk-grid>
+</div>
+{% for s in skill['skills'] %}
+<div id="{{ s['id'] }}" class="uk-section-default ">
+    <div class="uk-section uk-section-muted ">
+        <div class="uk-container ">
+            {% if s['example-type'] != '' %}
+            <div class="uk-child-width-1-3@m uk-grid-small" uk-grid>
                 {% else %}
                 <div class="uk-child-width-1-2@m uk-grid-small" uk-grid>
-                {% endif %}
+                    {% endif %}
                     <div class="uk-card uk-card-default uk-card-body">
                         <img class="uk-position-center uk-position-relative" src="{{ s['image'] }}" style="max-width:200px">
                     </div>
@@ -131,13 +113,12 @@
                         {% for k,v in s['descriptions'].items() %}
                         <h5 class="uk-text-center">{{k}}</h5>
                         <p class="uk-text-justify">{{v}}</p>
-                        {% endfor  %}
+                        {% endfor %}
                     </div>
-                    {% if s['example-type'] != ''  %}
+                    {% if s['example-type'] != '' %}
                     <div class="uk-card uk-card-default uk-card-body">
                         <a class="uk-button uk-button-default
-                            uk-position-relative uk-position-center"
-                            href="#{{s['id']}}example" uk-toggle>Open</a>
+                            uk-position-relative uk-position-center" href="#{{s['id']}}example" uk-toggle>Open</a>
 
                         <div id="{{s['id']}}example" class="uk-modal-full" uk-modal>
                             <div class="uk-modal-dialog">
@@ -146,20 +127,20 @@
                                     <div class="uk-padding-large">
                                         <h1>{{s['name']}}</h1>
                                         {% if s['example-type'] == "code" %}
-                                        
-                                            <script src={{s['gist-url']}}></script>
-                                    
+
+                                        <script src={{s[ 'gist-url']}}></script>
+
                                         </code>
                                         {% else %}
                                         <p class="uk-text-danger">Examples to Come SOON!!!</p>
                                         {% endif %}
-                                       
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% endif  %}
+                    {% endif %}
                 </div>
 
             </div>
@@ -179,30 +160,25 @@
         <form class="uk-text-center " method='POST'>
             <div class="uk-margin ">
                 <div class="uk-inline ">
-                    <input class="uk-input" placeholder="Full Name" name="name"
-                    type="text" required>
+                    <input class="uk-input" placeholder="Full Name" name="name" type="text" required>
                 </div>
             </div>
 
             <div class="uk-margin ">
                 <div class="uk-inline ">
-                    <input class="uk-input" placeholder="555-555-5555"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" type="tel"
-                    required>
+                    <input class="uk-input" placeholder="555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" type="tel" required>
                 </div>
             </div>
 
             <div class="uk-margin ">
                 <div class="uk-inline ">
-                    <input class="uk-input" placeholder="my_name@gmail.com"
-                    name="e-mail" type="email" required>
+                    <input class="uk-input" placeholder="example@gmail.com" name="e-mail" type="email" required>
                 </div>
             </div>
 
             <div class="uk-margin ">
                 <div class="uk-inline ">
-                    <textarea class="uk-textarea" rows="5" placeholder="Hey
-                        Harsh ..." name="message" required></textarea>
+                    <textarea class="uk-textarea" rows="5" placeholder="Hey Harsh ..." name="message" required></textarea>
                 </div>
             </div>
             <div class="uk-margin ">
@@ -212,10 +188,4 @@
             </div>
         </form>
     </div>
-</body>
-<br>
-<footer class="uk-text-center uk-background-muted">
-    <p>Made with ☕ by Harsh Patel</p>
-</footer>
-
-</html>
+    {%endblock%}
