@@ -78,6 +78,21 @@ def collect_metadata():
     user_agent = html.escape(str(request.user_agent))
     return remote_addr, user_agent
 
+# @app.route('/success/',methods=['GET'])
+# def success():
+#     # Try to get the user's cookie
+#     user_id = request.cookies.get('user_id')
+#     print(request.args.get('success'))
+#     if request.args.get('success') and request.args.get('success') == user_id :
+#         feedback = {"message":"I'll get back to you ASAP","status":"success"}
+#     else:
+#         feedback = None
+
+#     # Return template
+#     return render_template('success.html',feedback=feedback)
+
+
+
 @app.route('/',methods=['GET','POST'])
 def index():
 
