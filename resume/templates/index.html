@@ -12,18 +12,22 @@
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body class="uk-text-center uk-background-muted">
-    {% if feedback %}
-    <script>
-    UIkit.notification("{{feedback['message']}}","{{feedback['status']}}"); 
-    </script>
- 
-    {% endif %}
+<body class="uk-text-center uk-background-muted" style="font-family: 'helvetica'">
+<style>
+nav > div > ul > li > a{
+    color:white;
+}
+a{
+    color:white;
+}
+</style>
     <div class="uk-position-relative">
-        <div class="uk-position-top">
+        <div class="uk-position-top" >
 
-            <nav class="uk-navbar-container uk-navbar-secondary" uk-navbar>
-                <div class="uk-navbar-left">
+            <nav class="uk-navbar-container uk-navbar-transparent" style="display:block" uk-navbar>
+                    <div class="uk-navbar-item">
+  
+  
                     <ul class="uk-navbar-nav">
 
                         <li>
@@ -54,19 +58,37 @@
                         <li>
                             <a href="#Contact_Me" uk-scroll>Contact Me</a>
                         </li>
-                    </ul>
 
-                </div>
+
+                    </ul>
+          
+    
+             
+            </div>    
+            <div class="uk-navbar-item">
+                <ul class="uk-navbar-nav">
+                    <li>
+                            <a href="{{url_for('download_file')}}"><span uk-icon="icon: download;ratio:1"></span></a>
+                    </li>
+                    <li>
+                            <a href="https://www.linkedin.com/in/harsh-patel-ab375784"><span uk-icon="icon: linkedin;ratio:1"></span></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/harsh1498"><span uk-icon="icon: github;ratio:1"></span></a>
+                    </li>
+                </ul>
+            </div>
+
             </nav>
 
         </div>
     </div>
-
-    <a href="" class="uk-position-bottom-right uk-position-fixed uk-background-secondary" uk-totop uk-scroll></a>
-
-    <div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg, blue , black);">
-        <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 1,0.5; y:
-	0,100; viewport: 1 ">{{context['name']}}</h1>
+<div class="uk-container">
+    <a href="" style="z-index:1000" class="uk-position-bottom-right uk-position-fixed uk-background-transparent" uk-totop="ratio:3" uk-scroll></a>
+</div>
+    <div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="height:100vh;background-image: linear-gradient(-25deg, blue,red );">
+        <img class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 1,0.5; y:
+	0,100; viewport: 1 " src="static/images/Logo.svg">
     </div>
 
     <div id="About" class="uk-section uk-section-muted uk-text-left">
@@ -99,14 +121,41 @@
                         {% endfor %}
                     </div>
                 </div>
+
             </div>
+            <br>
+            <div>
+                    <div id="courses-header" class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title uk-text-center">Courses</h3>
+                        <button class="uk-button uk-button-secondary uk-align-center" uk-toggle="target: #courses" type="button">Toggle Courses</button>
+                        <table id="courses" class="uk-table uk-table-justify uk-table-divider" hidden>
+                            <thead>
+                                <tr>
+                                    <th>Course Tag</th>
+                                    <th>Course Title</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for course in context['courses'] %}
+                                    <tr id="{{course['name']}}">
+                                        <td>{{course['name']}}</td>
+                                        <td>{{course['title']}}</td>
+                                        <td>{{course['description']}}</td>
+                                    </tr>
+                                    {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
 
         </div>
 
-
     </div>
     {% for skill in context['skill_types'] %} {% set img = skill['name'] %}
-    <div id={{skill['name']}} class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg,{{skill['gradient-to']}},{{skill['gradient-from']}});">
+    <div id={{skill['name']}} class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-25deg,{{skill['gradient-to']}},{{skill['gradient-from']}});">
 
         <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
         100,0; viewport: 0.5 ">{{ skill['name'] }}</h1>
@@ -127,6 +176,12 @@
                         <img class="uk-position-center uk-position-relative" src="{{ s['image'] }}" style="max-width:200px">
                     </div>
                     <div class="uk-card uk-card-default uk-card-body">
+                        {% for course in s['courses'] %}
+                        <a href="#courses-header" uk-scroll>
+                        <span class="uk-badge">{{course['tag']}}</span>
+                        </a>
+
+                        {% endfor %}
                         <h3 class="uk-card-title">{{s['name']}}</h3>
                         {% for k,v in s['descriptions'].items() %}
                         <h5 class="uk-text-center">{{k}}</h5>
@@ -169,41 +224,49 @@
 
 
 
-    <div id="Contact_Me" class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top " style="background-image: linear-gradient(-45deg, black, red);">
-
-        <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
-        100,0; viewport: 0.5 ">Contact Me</h1>
-
+    <div id="Contact_Me" class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top " style="background-image: linear-gradient(-25deg,blue,red);">
+            {% if visitors_name %}
+            <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
+            100,0; viewport: 0.5 ">{{visitors_name}}, I will get back to you soon!</h1>
+ 
+            {% else %}
+            <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
+            100,0; viewport: 0.5 ">Contact Me</h1>
+{% endif %}
     </div>
+
     <div class="uk-section uk-background-muted ">
-        <form class="uk-text-center " method='POST'>
+        
+            {% if not visitors_name %}
+
+        <form class="uk-text-center uk-margin-auto uk-form-width-medium" method='POST'>
+  
             <div class="uk-margin ">
-                <div class="uk-inline ">
+
                     <input class="uk-input" placeholder="Full Name" name="name"
                     type="text" required>
-                </div>
+
             </div>
 
             <div class="uk-margin ">
-                <div class="uk-inline ">
+      
                     <input class="uk-input" placeholder="555-555-5555"
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" type="tel"
                     required>
-                </div>
+       
             </div>
 
             <div class="uk-margin ">
-                <div class="uk-inline ">
-                    <input class="uk-input" placeholder="my_name@gmail.com"
+          
+                    <input class="uk-input" placeholder="example@gmail.com"
                     name="e-mail" type="email" required>
-                </div>
+            
             </div>
 
             <div class="uk-margin ">
-                <div class="uk-inline ">
-                    <textarea class="uk-textarea" rows="5" placeholder="Hey
-                        Harsh ..." name="message" required></textarea>
-                </div>
+       
+                    <textarea class="uk-textarea" rows="5" placeholder="Hey Harsh ..." name="message" required></textarea>
+          
             </div>
             <div class="uk-margin ">
                 <div uk-form-custom>
@@ -211,6 +274,28 @@
                 </div>
             </div>
         </form>
+        {% else %}
+
+<div class="uk-flex uk-flex-center">
+        <div class="uk-card uk-card-default uk-width-1-2@m">
+                <div class="uk-card-header uk-text-left">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-card-title uk-margin-remove-bottom">{{visitors_name}}'s Message</h3>
+                            <p class="uk-text-meta uk-margin-remove-top">Email: {{visitors_email}}<br>Phone Number: {{visitors_phone}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-body uk-text-left">
+                    <p>{{visitors_message}}</p>
+                </div>
+                <div class="uk-card-footer uk-text-left">
+                    <p class="uk-text-success">I will get back to you ASAP</p>
+                </div>
+            </div>
+</div>
+        {% endif %}
+
     </div>
 </body>
 <br>

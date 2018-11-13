@@ -3834,6 +3834,7 @@ ul.uk-nav-sub {
 .uk-navbar-center:not(:only-child) .uk-navbar-item,
 .uk-navbar-center:not(:only-child) .uk-navbar-toggle {
   white-space: nowrap;
+  color:white;
 }
 /* 4 */
 .uk-navbar-center-left,
