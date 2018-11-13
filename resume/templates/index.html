@@ -50,7 +50,7 @@ a{
                                     <li>
                                         <a href="#{{ skill['id'] }}" uk-scroll>{{ skill['name'] }}</a>
                                     </li>
-                                </strong>
+                                    {% endfor %} {% endfor %}
 
                                 </ul>
                             </div>
@@ -81,6 +81,7 @@ a{
 
             </nav>
 
+        </div>
     </div>
 <div class="uk-container">
     <a href="" style="z-index:1000" class="uk-position-bottom-right uk-position-fixed uk-background-transparent" uk-totop="ratio:3" uk-scroll></a>
@@ -90,34 +91,35 @@ a{
 	0,100; viewport: 1 " src="static/images/Logo.svg">
     </div>
 
-<div id="About" class="uk-section uk-section-muted uk-text-left">
-    <div class="uk-container">
+    <div id="About" class="uk-section uk-section-muted uk-text-left">
+        <div class="uk-container">
 
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">
-                <h3>About Me</h3>
-                <p>{{ context['elevator_pitch'] }}</p>
-            </div>
-        </div>
-        <br>
-        <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
             <div>
                 <div class="uk-card uk-card-default uk-card-body">
-                    <h3 class="uk-card-title">Major</h3>
-                    {% for key,value in context['major'].items() %}
-                    <p>
-                        <strong>{{ key }}:</strong> {{ value }}</p>
-                    {% endfor %}
-
+                    <h3>About Me</h3>
+                    <p>{{ context['elevator_pitch'] }}</p>
                 </div>
             </div>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body">
-                    <h3 class="uk-card-title">Current Job</h3>
-                    {% for key,value in context['current_title'].items() %}
-                    <p>
-                        <strong>{{ key }}:</strong> {{ value }}</p>
-                    {% endfor %}
+            <br>
+            <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Major</h3>
+                        {% for key,value in context['major'].items() %}
+                        <p>
+                            <strong>{{ key }}:</strong> {{ value }}</p>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Current Job</h3>
+                        {% for key,value in context['current_title'].items() %}
+                        <p>
+                            <strong>{{ key }}:</strong> {{ value }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
 
             </div>
@@ -155,26 +157,21 @@ a{
     {% for skill in context['skill_types'] %} {% set img = skill['name'] %}
     <div id={{skill['name']}} class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-25deg,{{skill['gradient-to']}},{{skill['gradient-from']}});">
 
-
-</div>
-{% for skill in context['skill_types'] %} {% set img = skill['name'] %}
-<div id={{skill[ 'name']}} class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: linear-gradient(-45deg,{{skill['gradient-to']}},{{skill['gradient-from']}});">
-
-    <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
+        <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 0,1; y:
         100,0; viewport: 0.5 ">{{ skill['name'] }}</h1>
 
 
 
-</div>
-{% for s in skill['skills'] %}
-<div id="{{ s['id'] }}" class="uk-section-default ">
-    <div class="uk-section uk-section-muted ">
-        <div class="uk-container ">
-            {% if s['example-type'] != '' %}
-            <div class="uk-child-width-1-3@m uk-grid-small" uk-grid>
+    </div>
+    {% for s in skill['skills'] %}
+    <div id="{{ s['id'] }}" class="uk-section-default ">
+        <div class="uk-section uk-section-muted ">
+            <div class="uk-container ">
+                {% if s['example-type'] != '' %}
+                <div class="uk-child-width-1-3@m uk-grid-small" uk-grid>
                 {% else %}
                 <div class="uk-child-width-1-2@m uk-grid-small" uk-grid>
-                    {% endif %}
+                {% endif %}
                     <div class="uk-card uk-card-default uk-card-body">
                         <img class="uk-position-center uk-position-relative" src="{{ s['image'] }}" style="max-width:200px">
                     </div>
@@ -189,12 +186,13 @@ a{
                         {% for k,v in s['descriptions'].items() %}
                         <h5 class="uk-text-center">{{k}}</h5>
                         <p class="uk-text-justify">{{v}}</p>
-                        {% endfor %}
+                        {% endfor  %}
                     </div>
-                    {% if s['example-type'] != '' %}
+                    {% if s['example-type'] != ''  %}
                     <div class="uk-card uk-card-default uk-card-body">
                         <a class="uk-button uk-button-default
-                            uk-position-relative uk-position-center" href="#{{s['id']}}example" uk-toggle>Open</a>
+                            uk-position-relative uk-position-center"
+                            href="#{{s['id']}}example" uk-toggle>Open</a>
 
                         <div id="{{s['id']}}example" class="uk-modal-full" uk-modal>
                             <div class="uk-modal-dialog">
@@ -203,20 +201,20 @@ a{
                                     <div class="uk-padding-large">
                                         <h1>{{s['name']}}</h1>
                                         {% if s['example-type'] == "code" %}
-
-                                        <script src={{s[ 'gist-url']}}></script>
-
+                                        
+                                            <script src={{s['gist-url']}}></script>
+                                    
                                         </code>
                                         {% else %}
                                         <p class="uk-text-danger">Examples to Come SOON!!!</p>
                                         {% endif %}
-
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% endif %}
+                    {% endif  %}
                 </div>
 
             </div>
@@ -299,4 +297,10 @@ a{
         {% endif %}
 
     </div>
-    {%endblock%}
+</body>
+<br>
+<footer class="uk-text-center uk-background-muted">
+    <p>Made with ☕ by Harsh Patel</p>
+</footer>
+
+</html>

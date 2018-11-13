@@ -1,12 +1,12 @@
 [
   {
     "name": "Harsh Patel",
-    "elevator_pitch": "I am an undergraduate student at the University of Maryland, Baltimore County majoring in Computer Science. I have been working in the industry for about 2+ years dealing with technologies ranging from Wordpress, HTML, CSS and front-end Web Frameworks to Flask, Nginx, OpenVPN, Docker and other backend technologies. I have attended multiple hackathons and par-took in the Google CTF event. I am also involved in few technical clubs on campus. It is due to these skills and experiences that I know I am a strong candidate for technical internships. I have a significant amount of real world experience that unfortunately, most students don't get until their senior year or even after graduation. I also have a strong skill in explaining technical topics in a concise and comphreadable manner. Most importantly, I am very passionate about my major and take active steps to stay on top of current news related to the industry. Would you want to hire someone with no passion for their work? Hire me and you will get an experinced, well educated, diverse, and passionate employee.",
+    "elevator_pitch":"I am an undergraduate student at University of Maryland, Baltimore County majoring in Computer Science. I have been working in the industry for about 2+ years dealing with technologies ranging from wordpress, HTML, CSS and frontend webframeworks to Flask, Nginx, OpenVPN, Docker and other backend technologies. I have attended multiple hackathons and partook in the Google CTF event. I am also involved in few technical clubs on campus.",
     "current_title": {
       "Name": "Technology Intern",
       "Company": "FedData",
-      "Description": "I develop programs and systems using technologies such as OpenVPN, Flask,Nginx, Django, Python, VirtualBox and many other technologies.",
-      "Start": "July, 2017",
+      "Description": "I develop software",
+      "Start": "Jul, 2017",
       "End": "Present"
     },
     "courses":[
@@ -68,7 +68,7 @@
             },
             "image": "static/images/assembly.jpg",
             "example": "",
-            "example-type": ""
+            "example-type":""
           }
         ]
       },
@@ -90,7 +90,7 @@
             },
             "image": "static/images/git",
             "example": "",
-            "example-type": ""
+            "example-type":""
           },
           {
             "name": "Virtualization",
@@ -103,18 +103,19 @@
             "Real World Description": "I have made countless VMs use VirtualBox that do anything from act as my dev enviornment to act as a node in a mock network configuration. I have done networking between VMs, and setup guest editions and shared folders along with other virtualbox configurations. I have also exported virtual machines to .ova and .vhd"
             },
             "image": "static/images/Virtualbox.png",
-            "example": "",
-            "example-type": ""
+            "example":"",
+            "example-type":""
           },
           {
             "name": "Docker",
-            "id": "docker",
-            "descriptions": {
-              "Real World Description": "I have used Docker and Docker Compose to containerize applications and make the application deployment repeatable on the cloud. I have configured volumes to have data stored outside the docker app and set up communication between docker applications. I have deployed containers to Google Cloud Platform using their compute engine services and in fact, this application itself is dockerized."
+            "id":"docker",
+            "descriptions":{
+            "Acedemic Description": "I have yet to have a class that had me use docker.",
+            "Real World Description": "I have used Docker and Docker Compose to containerize applications and make the application deployment repeatable. I have configured volumes to have data stored outside the docker app and setup communication between docker applications."
             },
             "image": "static/images/docker.png",
-            "example": "",
-            "example-type": ""
+            "example":"",
+            "example-type":""
           }
         ]
       },
@@ -125,23 +126,23 @@
         "skills": [
           {
             "name": "Presentations",
-            "id": "presentation",
-            "descriptions": {
-              "General Description": "I have made an abundance of presentations for classes with topics ranging from book reports to group project final presentations. I often use Google Slides or Microsoft PowerPoint to make visually stunning presentations. I have watched TED talks on how to make presentations meaningful yet concise and visually apealing. I have made presentations for all final projects for summer internships and presented them to high ranking members of the company (including the CEO)."
+            "id":"presentation",
+            "descriptions":{
+            "General Description": "I have made an abudance of presentations for classes with topics ranging from book reports to group project final presentations. I often use Google Slides or Microsoft Powerpoint to make visually stuning presentations. I have watched TED talks on how to make presentations meaningful yet consice and vusially apealing. I have made presentations for all final projects for summer internships and presented them to high ranking members of the company (including the CEO)."
             },
             "image": "static/images/presentation.jpg",
-            "example": "",
-            "example-type": ""
+            "example":"",
+            "example-type":""
           },
           {
             "name": "Teaching",
-            "id": "teaching",
-            "descriptions": {
-              "General Description": "I have been an Undergraduate Teaching Assistant for CMSC 201 for 2 whole semesters (continuing this semester) and have held labs with 20+ students, graded assignments, and answered questions during office hours. This position requires the ability to explain concepts in multiple different ways to different students. It requires a solid foundation on my own knowledge of introductory computer science concepts, and it requires great communication skills to properly convey important technical information to students without a technical background."
+            "id":"teaching",
+            "descriptions":{
+            "General Description": "I have been a TA for CMSC 201 for 2 semesters and have held labs with thirty students, graded assignments, and answered questions during office hours.I have volunteered to help at a summer camp where we took care of childern during the day, taught them a little bit of math and reading. We helped them grow and have a productive summer whilst having fun at the same time."
             },
             "image": "static/images/teaching.png",
-            "example": "",
-            "example-type": ""
+            "example":"",
+            "example-type":""
           }
         ]
       }
