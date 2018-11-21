@@ -13,14 +13,7 @@
 </head>
 
 <body class="uk-text-center uk-background-muted" style="font-family: 'helvetica'">
-<style>
-nav > div > ul > li > a{
-    color:white;
-}
-a{
-    color:white;
-}
-</style>
+
     <div class="uk-position-relative">
         <div class="uk-position-top" >
 
@@ -35,7 +28,7 @@ a{
                         </li>
                         <li>
                             <a>Skills</a>
-                            <div class="uk-navbar-dropdown">
+                            <div class="uk-navbar-dropdown" uk-dropdown="pos: bottom-justify">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     {% for index in range(context['skill_types']|length) %}
                                     <strong>
@@ -163,18 +156,23 @@ a{
 
 
     </div>
+    <div class="uk-container">
     {% for s in skill['skills'] %}
-    <div id="{{ s['id'] }}" class="uk-section-default ">
+    <!-- <div class="uk-container"> -->
+    <div id="{{ s['id'] }}" class="uk-section-default">
         <div class="uk-section uk-section-muted ">
             <div class="uk-container ">
                 {% if s['example-type'] != '' %}
-                <div class="uk-child-width-1-3@m uk-grid-small" uk-grid>
+                <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
                 {% else %}
-                <div class="uk-child-width-1-2@m uk-grid-small" uk-grid>
+                <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
                 {% endif %}
+                <div>
                     <div class="uk-card uk-card-default uk-card-body">
-                        <img class="uk-position-center uk-position-relative" src="{{ s['image'] }}" style="max-width:200px">
+                        <img class="uk-position-center uk-position-relative" src="{{ s['image'] }}" style="max-width:200px;max-height:200px">
                     </div>
+                </div>
+                <div>
                     <div class="uk-card uk-card-default uk-card-body">
                         {% for course in s['courses'] %}
                         <a href="#courses-header" uk-scroll>
@@ -188,7 +186,8 @@ a{
                         <p class="uk-text-justify">{{v}}</p>
                         {% endfor  %}
                     </div>
-                    {% if s['example-type'] != ''  %}
+                </div>
+                    <!-- {% if s['example-type'] != ''  %}
                     <div class="uk-card uk-card-default uk-card-body">
                         <a class="uk-button uk-button-default
                             uk-position-relative uk-position-center"
@@ -214,13 +213,14 @@ a{
                             </div>
                         </div>
                     </div>
-                    {% endif  %}
+                    {% endif  %} -->
                 </div>
 
             </div>
         </div>
     </div>
-    {% endfor %} {% endfor %}
+</div>
+    {% endfor %} </div>{% endfor %}
 
 
 
