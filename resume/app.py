@@ -4,7 +4,10 @@ import json
 import sqlite3
 import uuid
 import html
-
+import re
+from validate_email import validate_email
+import phonenumbers
+from phonenumbers import geocoder, carrier
 
 DATABASE_FILE_NAME = "app.db"
 
@@ -166,7 +169,17 @@ def index():
         phone = html.escape(str(request.form.get('phone')))
         email = html.escape(str(request.form.get('e-mail')))
         message = html.escape(str(request.form.get('message')))
- 
+
+        if not (validate_email(email) and phonenumbers.is_possible_number(phonenumbers.parse(phone,"US")) and phonenumbers.is_valid_number(phonenumbers.parse(phone,"US"))):  
+            url = '/'
+            resp = make_response(redirect(url))
+            return resp
+        else:
+            phone_number = phone
+            phone = phonenumbers.parse(phone,"US")
+            phone_desc = geocoder.description_for_number(phone,"en")
+            phone_carrier = carrier.name_for_number(phone,"en")
+
         # Get their user cookie
         user_id = html.escape(str(request.cookies.get('user_id')))
 
@@ -174,7 +187,7 @@ def index():
         visits = get_visits(user_id)
 
         # Construct a body for the message
-        body = "Name: {} ; Visits:{} ; Phone Number: {} ; E-mail: {} ; Message: {}".format(name,visits,phone,email,message)
+        body = "Name: {} ; Visits:{} ; Phone Number: {} ; Phone Description: {} ; Phone Carrier: {} ; E-mail: {} ; Message: {}".format(name,visits,phone_number,phone_desc,phone_carrier,email,message)
 
         # Post the message to slack
         requests.post("https://hooks.slack.com/services/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",json={"text":body})
