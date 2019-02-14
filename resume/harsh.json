@@ -1,7 +1,7 @@
 [
   {
     "name": "Harsh Patel",
-    "elevator_pitch": "I have always seen technology growing up. Whilst it was scarce and expensive, my parents still got me the current gadget. At first I took advantage of it, but as years went by, I saw the difficulty of buying such gadgets. My parents bought it in hopes that it would give me access to knowledge that others at the time just could not access. I want to create it in order to make sure that others in the future never lack the opporunities I grew up with. I want to develop for everyone to experince the opporunities technology presented me.",
+    "elevator_pitch":"I started in this industry as the team captain of my local robotics team (Absolute Control) in senior year of high school. We won multiple awards including rookie of the year. After having led the team and working closely with our programming team, I built a passion for the software development and engineering. I then continued to get an internship at COSONY where I was introduced to the IT services team. I helped clients keep their systems in working order and maintained backend technologies and servers. After the IT experience, I was recruited my SmartHost Design Technologies to both help expand their brand on social media and work closely with their clients to migrate client sites to a mobile friendly version. \t I am currently working as a Technology Intern at FedData and a Undergraduate Teaching Assistant at University of Maryland Baltimore County (UMBC) along with the being enrolled as a Full time student at UMBC. As a Technology Intern, I have worked on 6 projects in the past year and half. These projects range from user experience frontend development, to backend networking automation. As a Teaching Assistant for Computer Science 1, I guide labs of 20 students, grade homeworks and projects, and answer computer science related questions during office hours. Finally,  I am a third year undergraduate computer science major on track to graduate in May, 2020. \t I ultimately see myself working full-time in the industry as a Software Engineer and plan on getting my masters degree within the next 5 years.",
     "current_title": {
       "Name": "Technology Intern",
       "Company": "FedData",
@@ -9,76 +9,150 @@
       "Start": "Jul, 2017",
       "End": "Present"
     },
+    "courses":[
+      {"name":"CMSC 201","title":"Computer Science I for Majors","description":"An introduction to computer science through problem solving and computer programming. Programming techniques covered by this course include modularity, abstraction, top-down design, specifications documentation, debugging and testing. The core material for this course includes control structures, functions, lists, strings, abstract data types, file I/O, and recursion. "},
+      {"name":"CMSC 202","title":"Computer Science II for Majors","description":"This course continues the student’s development of programming and problem-solving skills by providing an introduction to object-oriented design and programming (OOP). The primary focus is on OOP principles and techniques, including encapsulation, composition, inheritance, and polymorphism. Other OOP topics such as exception handling, containers, and generic programming are also covered. This is the second course for students interested in pursuing further study in computer science. "},
+      {"name":"CMSC 203","title":"Discrete Structures","description":"This course introduces the fundamental tools, topics and concepts of discrete mathematics needed to study computer science. This course emphasizes counting methods, proof techniques and problem solving strategies. Topics include Boolean algebra; set theory; symbolic logic; predicate calculus; number theory; the methods of direct, indirect and inductive proofs; objective functions; equivalence relations; graphs; set partitions; combinatorics; modular arithmetic; summations; and recurrences."},
+      {"name":"CMSC 341","title":"Data Structures","description":"An examination of a range of advanced data structures, with an emphasis on an object-oriented approach. Topics include asymptotic analysis; various binary search trees, including red-black and splay trees; skip lists as alternatives to binary search trees; data structures for multidimensional data such as K-D trees; heaps and priority queues, including binary heaps, binomial heaps, leftist heaps (and/or other mergeable heaps); B-trees for external storage; other commonly used data structures, such as hash tables and disjoint sets. Programming projects in this course will focus on implementation issues for data structures and on empirical analysis of their asymptotic performance."},
+      {"name":"CMSC 313","title":"Computer Organization and Assembly Language Programming","description":"This course introduces the student to the low-level abstraction of a computer system from a programmer’s point of view, with an emphasis on low-level programming. Topics include data representation, assembly language programming, C programming, the process of compiling and linking, low-level memory management, exceptional control flow, and basic processor architecture. "},
+      {"name":"CMSC 331","title":"Principles of Programming Language","description":"This course examines the theory, design and implementation of programming languages and provides students with an introduction to programming languages that are likely to be new to them. Topics include specifications of syntax and semantics, declarations, binding, allocation, data structures, data types, control structures, control and data flow, concurrency, and the implementation and execution of programs. The major language paradigms will be described and explored, including imperative, object-oriented, functional, logic programming, concurrent and others. Programming projects will provide experience in several languages. "},
+      {"name":"CMSC 411","title":"Computer Architecture","description":"This course covers the design of complex computer systems making heavy use of the components and techniques discussed in CMSC 313, CMPE 212 and CMPE 310. All parts of the computer system - CPU, memory and input/output - are discussed in detail. Topics include information representation, floating-point arithmetic, instructions set design issues (RISC vs. CISC), microprogrammed control, hardwired control, pipelining, memory cashes, bus control and timing,input/output mechanism and issues in the construction of parallel processors."},
+      {"name":"CMSC 421","title":"Principles of Operating Systems","description":"An introduction to the fundamentals of operating systems. Topics include interprocess communication, process scheduling, deadlock, memory management, virtual memory, file systems and distributed systems. Formal principles are illustrated with examples and case studies of one or more contemporary operating systems. "}
+    ],
     "skill_types": [
       {
         "name": "Programming",
+        "gradient-from": "blue",
+        "gradient-to": "purple",
         "skills": [
           {
             "name": "Python",
-            "description-a": "I started learning Python in Computer Science 201 (Introduction to Computer Science). We learned about the different types of loops, recursion, general control structures and proper coding standards",
-            "description-rw": "I use Python at my internship at FedData to create web applications to data parsing scripts. I have even been TA-ing for CMSC 201 for 2 semesters now and I am going into my third semester as a teaching assistant.",
-            "image": "static/images/python-logo.svg"
+            "id":"python",
+            "courses":[
+              {"tag":"CMSC 201"}
+            ],
+            "descriptions":{
+            "Acedemic Description": "I started learning Python in Computer Science 201 (Introduction to Computer Science). We learned about the different types of loops, recursion, general control structures and proper coding standards",
+            "Real World Description": "I use Python at my internship at FedData to create web applications to data parsing scripts. I have even been TA-ing for CMSC 201 for 2 semesters now and I am going into my third semester as a teaching assistant."
+            },
+            "image": "static/images/python-logo.svg",
+            "gist-url":"https://gist.github.com/harsh1498/a7ccafb41ad13b9fbb463a0fc4245398.js",
+            "example-type":""
           },
           {
-            "name": "C++/C",
-            "description-a": "I have used C++ in multiple computer science courses ranging from Computer Science 202 (Introduction to Computer Science 2) to Computer Science 341 (Data Structures). It is used in many of our courses at UMBC and I have created many data structures such as square lists, binary trees, and hash tables using C++. I also have used C for many classes including Computer Science 313 (C and Assembly) and will be using it more in Computer Science 421 (Operating Systems) and Computer Science 411 (Architecture)",
-            "description-rw": "I have made a simple game with intentional security vulnerabilities for a CTF.",
-            "image": "static/images/cpp_logo.png"
+            "name": "C/C++",
+            "id":"c-cpp",
+            "courses":[
+              {"tag":"CMSC 202"},
+              {"tag":"CMSC 341"},
+              {"tag":"CMSC 313"}
+            ],
+            "descriptions":{
+            "Acedemic Description": "I have used C++ in multiple computer science courses ranging from Computer Science 202 (Introduction to Computer Science 2) to Computer Science 341 (Data Structures). It is used in many of our courses at UMBC and I have created many data structures such as square lists, binary trees, and hash tables using C++. I also have used C for many classes including Computer Science 313 (C and Assembly) and will be using it more in Computer Science 421 (Operating Systems) and Computer Science 411 (Architecture)",
+            "Real World Description": "I have made a simple game with intentional security vulnerabilities for a CTF."
+            },
+            "image": "static/images/cpp_logo.png",
+            "gist-url": "https://gist.github.com/harsh1498/880833a4ad1aa4d22bf20ab1495a836f.js",
+            "example-type":""
           },
           {
             "name": "Assembly",
-            "description-a": "I have used assembly in Computer Science 313 (C and Assembly) in i386 architecture.",
-            "description-rw": "I have also parsed the disassembly of programs for a Capture the Flag (CTF) event I par-took in.",
-            "image": "static/images/assembly.jpg"
+            "id":"asm",
+            "courses":[
+              {"tag":"CMSC 313"},
+              {"tag":"CMSC 411"}
+            ],
+            "descriptions":{
+            "Acedemic Description": "I have used assembly in Computer Science 313 (C and Assembly) in i386 architecture.",
+            "Real World Description": "I have also parsed the disassembly of programs for a Capture the Flag (CTF) event I par-took in."
+            },
+            "image": "static/images/assembly.jpg",
+            "example": "",
+            "example-type":""
           }
         ]
       },
       {
         "name": "Software",
+        "gradient-from": "purple",
+        "gradient-to": "pink",
         "skills": [
           {
             "name": "Git",
-            "description-a": "I used git to manage my projects and homeworks that were due for Computer Science 331 (Principles of programming languages).",
-            "description-rw": "I use git to manage most of my project at my internships. We documented and followed a git workflow, made multiple repositories and branches, solved merge conflicts and managed git commits and merges.",
-            "image": "static/images/git"
+            "id":"git",
+            "courses":[
+              {"tag":"CMSC 331"},
+              {"tag":"CMSC 421"}
+            ],
+            "descriptions":{
+            "Acedemic Description":"I used git to manage my projects and homeworks that were due for Computer Science 331 (Principles of programming languages).",
+            "Real World Description": "I use git to manage most of my project at my internships. We documented and followed a git workflow, made multiple repositories and branches, solved merge conflicts and managed git commits and merges."
+            },
+            "image": "static/images/git",
+            "example": "",
+            "example-type":""
           },
           {
-            "name": "Virtual Machines",
-            "description-a": "In Computer Science 421 (Operating Systems), we will be using virtualbox to create a vuirtual machine to write and test kernel modules in.",
-            "description-rw": "I have made countless VMs use VirtualBox that do anything from act as my dev enviornment to act as a node in a mock network configuration. I have done networking between VMs, and setup guest editions and shared folders along with other virtualbox configurations. I have also exported virtual machines to .ova and .vhd",
-            "image": "static/images/Virtualbox.png"
+            "name": "Virtualization",
+            "id":"virtualization",
+            "courses":[
+              {"tag":"CMSC 421"}
+            ],
+            "descriptions":{
+            "Acedemic Description":"In Computer Science 421 (Operating Systems), we will be using virtualbox to create a vuirtual machine to write and test kernel modules in.",
+            "Real World Description": "I have made countless VMs use VirtualBox that do anything from act as my dev enviornment to act as a node in a mock network configuration. I have done networking between VMs, and setup guest editions and shared folders along with other virtualbox configurations. I have also exported virtual machines to .ova and .vhd"
+            },
+            "image": "static/images/Virtualbox.png",
+            "example":"",
+            "example-type":""
           },
           {
             "name": "Docker",
-            "description-a": "I have yet to have a class that had me use docker.",
-            "description-rw": "I have used Docker and Docker Compose to containerize applications and make the application deployment repeatable. I have configured volumes to have data stored outside the docker app and setup communication between docker applications.",
-            "image": "static/images/docker.png"
+            "id":"docker",
+            "descriptions":{
+            "Acedemic Description": "I have yet to have a class that had me use docker.",
+            "Real World Description": "I have used Docker and Docker Compose to containerize applications and make the application deployment repeatable. I have configured volumes to have data stored outside the docker app and setup communication between docker applications."
+            },
+            "image": "static/images/docker.png",
+            "example":"",
+            "example-type":""
           }
         ]
       },
       {
-        "name": "Misc",
+        "name": "Interpersonal",
+        "gradient-from": "pink",
+        "gradient-to": "red",
         "skills": [
           {
-            "name": "Presentation Creation",
-            "description-a": "I have made an abudance of presentations for classes with topics ranging from book reports to group project final presentations. I often use Google Slides or Microsoft Powerpoint to make visually stuning presentations. I have watched TED talks on how to make presentations meaningful yet consice and vusially apealing",
-            "description-rw": "I have made presentations for all final projects for summer internships and presented them to high ranking members of the company (including the CEO).",
-            "image": "static/images/presentation.jpg"
+            "name": "Presentations",
+            "id":"presentation",
+            "descriptions":{
+            "General Description": "I have made an abudance of presentations for classes with topics ranging from book reports to group project final presentations. I often use Google Slides or Microsoft Powerpoint to make visually stuning presentations. I have watched TED talks on how to make presentations meaningful yet consice and vusially apealing. I have made presentations for all final projects for summer internships and presented them to high ranking members of the company (including the CEO)."
+            },
+            "image": "static/images/presentation.jpg",
+            "example":"",
+            "example-type":""
           },
           {
             "name": "Teaching",
-            "description-a": "I have been a TA for CMSC 201 for 2 semesters and have held labs with thirty students, graded assignments, and answered questions during office hours.",
-            "description-rw": "I have volunteered to help at a summer camp where we took care of childern during the day, taught them a little bit of math and reading. We helped them grow and have a productive summer whilst having fun at the same time.",
-            "image": "static/images/teaching.png"
+            "id":"teaching",
+            "descriptions":{
+            "General Description": "I have been a TA for CMSC 201 for 2 semesters and have held labs with thirty students, graded assignments, and answered questions during office hours.I have volunteered to help at a summer camp where we took care of childern during the day, taught them a little bit of math and reading. We helped them grow and have a productive summer whilst having fun at the same time."
+            },
+            "image": "static/images/teaching.png",
+            "example":"",
+            "example-type":""
           }
         ]
       }
     ],
     "major": {
       "Major": "Computer Science",
+      "Minor": "Math",
       "University": "UMBC",
       "Start": "Aug, 2016",
-      "End": "Present"
+      "End": "May, 2020"
     }
   }
 ]
