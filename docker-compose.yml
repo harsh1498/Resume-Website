@@ -6,3 +6,4 @@ services:
             - "5000:5000"
         volumes:
             - ./resume/app.db:/app/resume/app.db
+            - ./resume/articles:/app/resume/articles

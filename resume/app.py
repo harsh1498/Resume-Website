@@ -5,9 +5,13 @@ import sqlite3
 import uuid
 import html
 import re
+import os
 from validate_email import validate_email
 import phonenumbers
 from phonenumbers import geocoder, carrier
+import markdown
+
+md = markdown.Markdown()
 
 DATABASE_FILE_NAME = "app.db"
 
@@ -15,7 +19,10 @@ app = Flask(__name__)
 
 app.config['RESUME_PATH'] = "~/"
 app.config['RESUME_NAME'] = "resume.pdf"
+app.config['ARTICLE_PATH'] = "./articles"
 CONTEXT = {}
+BLOGS = []
+
 
 @app.route('/pdfresume/',methods=["GET"])
 def download_file():
@@ -81,86 +88,69 @@ def collect_metadata():
     user_agent = html.escape(str(request.user_agent))
     return remote_addr, user_agent
 
+def update_counts(user_id, value, key):
+    conn = sqlite3.connect(DATABASE_FILE_NAME)
+    c = conn.cursor()
+    c.execute('UPDATE counts set value={} where key="{}" and user_cookie="{}"'.format(value,key,user_id)) 
+    conn.commit()
+    conn.close()
+
+def get_user_info(user_id):
+    conn = sqlite3.connect(DATABASE_FILE_NAME)
+    c = conn.cursor()
+    c.execute('SELECT name,email,phone from user where cookie="{}"'.format(user_id))
+    visitor = c.fetchone()
+    c.execute('SELECT message from message where user_cookie="{}"'.format(user_id))
+    visitors_message = c.fetchone()
+    if visitor == None or visitors_message == None:
+        return [None,None,None,None]
+    return visitor+visitors_message
+
+def cookie_management(template,article_index=None):
+    remote_addr,user_agent = collect_metadata()
+    # Try to get the user's cookie
+    user_id = request.cookies.get('user_id')
+
+    # And the user does not have a cookie defined
+    if not user_id:
+        # Define a new user cookie
+        user_id = html.escape(str(uuid.uuid4().hex))
+        # Insert a new ANON user into the database
+        new_anon_user(user_id)
+        # Updates store ANON user's metadata
+        store_metadata(remote_addr,user_agent,user_id)
+        # Generate a response object 
+        if article_index:
+            resp = make_response(render_template(template,context=CONTEXT[0],article=BLOGS[article_index-1]))
+        else:
+            resp = make_response(render_template(template,context=CONTEXT[0],blogs=BLOGS))
+        resp.set_cookie('user_id',user_id)
+    else:
+        # Get user's cookie
+        user_id = html.escape(str(user_id))
+        # Get visits
+        visits = get_visits(user_id)
+        # Update visits key
+        update_counts(user_id,visits+1,"visits")
+        visitors_name, visitors_email, visitors_phone, visitors_message = get_user_info(user_id)
+        # Updates store ANON user's metadata
+        store_metadata(remote_addr,user_agent,user_id)
+        # Create the response object
+        if article_index:
+            resp = make_response(render_template(template,context=CONTEXT[0],article=BLOGS[article_index-1],visitors_name=visitors_name,visitors_message=visitors_message,visitors_email=visitors_email,visitors_phone=visitors_phone))
+        else:
+            resp = make_response(render_template(template,context=CONTEXT[0],blogs=BLOGS,visitors_name=visitors_name,visitors_message=visitors_message,visitors_email=visitors_email,visitors_phone=visitors_phone))
+
+    return resp
+
 @app.route('/',methods=['GET','POST'])
 def index():
-
-
     # Get User's Metadata
     remote_addr,user_agent = collect_metadata()
 
     # If the user makes a get request
     if request.method == 'GET':
-        # Try to get the user's cookie
-        user_id = request.cookies.get('user_id')
-
-        # And the user does not have a cookie defined
-        if not user_id:
-
-            # Define a new user cookie
-            user_id = html.escape(str(uuid.uuid4().hex))
-
-            # Insert a new ANON user into the database
-            new_anon_user(user_id)
-
-            # Updates store ANON user's metadata
-            store_metadata(remote_addr,user_agent,user_id)
-
-            # Generate a response object 
-            resp = make_response(render_template('index.html',context=CONTEXT[0]))
-            resp.set_cookie('user_id',user_id)
-
-        else:
-            # Get user's cookie
-            user_id = html.escape(str(request.cookies.get('user_id')))
-
-            # Get visits
-            visits = get_visits(user_id)
-            
-            if visits == None:
-                # Define a new user cookie
-                user_id = html.escape(str(uuid.uuid4().hex))
-
-                # Insert a new ANON user into the database
-                new_anon_user(user_id)
-
-                # Updates store ANON user's metadata
-                store_metadata(remote_addr,user_agent,user_id)
-
-                # Make a response object, set cookie, and redirect
-                resp = make_response(render_template('index.html',context=CONTEXT[0]))
-                resp.set_cookie('user_id',user_id)
-
-            else:
-                # Update visits key
-                conn = sqlite3.connect(DATABASE_FILE_NAME)
-                c = conn.cursor()
-                c.execute('UPDATE counts set value={} where key="visits" and user_cookie="{}"'.format(visits+1,user_id)) 
-                c.execute('SELECT name,email,phone from user where cookie="{}"'.format(user_id))
-                visitors_name = c.fetchone()
-                c.execute('SELECT message from message where user_cookie="{}"'.format(user_id))
-                visitors_message = c.fetchone()
-
-                if visitors_name != None and visitors_message != None:
-                    print(visitors_name)
-                    visitors_name,visitors_email,visitors_phone = visitors_name
-                    visitors_message = visitors_message[0]
-                else:
-                    visitors_name = None
-                    visitors_email = None
-                    visitors_phone = None
-                    visitors_message = None
-                
-                conn.commit()
-                conn.close()
-                
-                # Updates store ANON user's metadata
-                store_metadata(remote_addr,user_agent,user_id)
-                
-
-
-                # Create the response object
-                resp = make_response(render_template('index.html',context=CONTEXT[0],visitors_name=visitors_name,visitors_message=visitors_message,visitors_email=visitors_email,visitors_phone=visitors_phone))
-
+        resp = cookie_management("index.html")
         return resp
 
     elif request.method == 'POST':
@@ -188,10 +178,8 @@ def index():
 
         # Construct a body for the message
         body = "Name: {} ; Visits:{} ; Phone Number: {} ; Phone Description: {} ; Phone Carrier: {} ; E-mail: {} ; Message: {}".format(name,visits,phone_number,phone_desc,phone_carrier,email,message)
-
         # Post the message to slack
         requests.post("https://hooks.slack.com/services/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",json={"text":body})
-
 
         if user_id:
             # Update existign user
@@ -218,8 +206,29 @@ def index():
         # Return response
         return resp
 
+@app.route('/blog',methods=['GET'])
+def blog():
+    resp = cookie_management("blog.html")
+    return resp
+
+@app.route('/article',methods=['GET'])
+def article():
+    try:
+        article_index = int(request.args.get('article', None))
+    except ValueError:
+        return redirect(url_for('blog'))
+    if article_index == None or article_index > len(BLOGS):
+        return redirect(url_for('blog'))
+    resp = cookie_management("article.html",article_index=article_index)
+    return resp
+
+
+
 if __name__ == '__main__':
-    harsh = open('harsh.json','r')
-    CONTEXT = json.loads(harsh.read())
-    harsh.close()
-    app.run(debug=True,host="0.0.0.0", port=5000)
+    with open('harsh.json','r') as harsh:
+        CONTEXT = json.loads(harsh.read())
+    for filename in os.listdir(app.config['ARTICLE_PATH']): 
+        with open(os.path.join(app.config['ARTICLE_PATH'],filename),'r') as f:
+            BLOGS.append(json.loads(f.read()))
+
+    app.run(debug=False,host="0.0.0.0", port=5000)

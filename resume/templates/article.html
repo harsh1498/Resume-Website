@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}
+{{ context['name'] }}
+{% endblock %}
+{% block body %}
+    <div class="uk-position-relative">
+        <div class="uk-position-top" >
+
+            <nav class="uk-navbar-container uk-navbar-transparent" style="display:block" uk-navbar>
+                    <div class="uk-navbar-item">
+  
+  
+                    <ul class="uk-navbar-nav">
+
+                        <li>
+                            <a href="{{url_for('index')}}#About" >About Me</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('blog')}}">Blog</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('index')}}#Contact_Me" >Contact Me</a>
+                        </li>
+
+
+                    </ul>
+          
+    
+             
+            </div>    
+            <div class="uk-navbar-item">
+                <ul class="uk-navbar-nav">
+                    <li>
+                            <a href="{{url_for('download_file')}}"><span uk-icon="icon: download;ratio:1"></span></a>
+                    </li>
+                    <li>
+                            <a href="https://www.linkedin.com/in/harsh-patel-ab375784"><span uk-icon="icon: linkedin;ratio:1"></span></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/harsh1498"><span uk-icon="icon: github;ratio:1"></span></a>
+                    </li>
+                </ul>
+            </div>
+
+            </nav>
+
+        </div>
+    </div>
+
+    <div class="uk-container">
+        <a href="" style="z-index:1000" class="uk-position-bottom-right uk-position-fixed uk-background-transparent" uk-totop="ratio:3" uk-scroll></a>
+    </div>
+        <div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: url('static/images/header.jpg');">
+            <img class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical " uk-parallax="opacity: 1,0.5; y:
+        0,100; viewport: 1 " src="static/images/blog_logo.svg">
+        </div>
+    <br>
+    <br>
+    <div class="uk-container-xsmall uk-text-left uk-text-justify" style="margin:auto;">
+    <article class="uk-article">
+        <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{article['heading']}}</a></h1>
+
+    <p class="uk-article-meta">Written by <a href="#">{{article["author"]}}</a> on {{article["date"]}}.</a></p>
+    {% for value in article["sections"] %}
+        <h3>{{ value['heading'] }}</h3>
+        <br>
+        <img src="{{ value['image'] }}" >
+        <br>
+        <br>
+        <p style="line-height: 1.5em">{{value['text']}}</p>
+    {% endfor %}
+    </article>
+</div>
+{% endblock %}

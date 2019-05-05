@@ -1,0 +1,29 @@
+{
+    "heading":"Variables (Computer Science 101)",
+    "author":"Harsh Patel",
+    "date":"April 29, 2019",
+    "lead-text":"Ever wanted to start coding and get into the Programming industry? Anyone can do it, but very few have the ability to understand the science behind it. This blog series will teach you the core basics of Computer Science and gradually progress...",
+    "lead-image":"static/images/variables[cmsc101]/WhatAreVariables.jpg",
+    "sections": [
+            {
+                "heading": "Introduction",
+                "image":"static/images/variables[cmsc101]/Introduction.jpg",
+                "text":"Computer Science is a very profitable industry with many misconceptions. While introducing many valuable topics, I will also point out some of these myths and try to provide information from the point of view of a computer science major. First off, why should you even read my content? I am a Computer Science major at UMBC who is about to graduate in one year. I have been interning for the past two years as a Technology Intern developing software primarily in Python. Python is a very versatile language and is one of the easier languages to start with, along with the fact our Introduction Computer Science course at UMBC was also taught in Python, I will be using Python for this Computer Science 101 series. The first topic in this series that I will be discussing is variables."
+            },
+            {
+                "heading":"What Are Variables?",
+                "image":"static/images/variables[cmsc101]/WhatAreVariables.jpg",
+                "text":"Variables are a method of referencing data values with a human readable tags. Think of them like labeled virtual boxes. Typically, we put stuff in boxes and label them in a way that describes what the box actually has inside it. So lets take the following senerio as example. We wanted to store our Christmas decorations, sets of plates and cups, and old clothes. We have three boxes to store these items in. One way to tackle this problem is to just separate all the Christmas decorations and put them into one box labeled Christmas decorations. We can then take the remaining two collections of items  and do a similar operation with them and our end result would be three boxes each with a descriptive label of what is inside the box. We can do this in real life, but how can we do this in Python3? Well the syntax is as follows: `<variable_name> = <data value>`. This is called the assignment operator. On the left hand side, we have the label of the box, and on the right hand side, we have the data. So, for example, if we wanted to store the amount of Christmas decorations we have, we may do something as follows: `christmas_decorations = 5`. This says that we have 5 Christmas decorations."
+            },
+            {
+                "heading":"Rules on Variable Names in Python3",
+                "image":"static/images/variables[cmsc101]/Rules.jpg",
+                "text":"First, variable names should not contain special characters like space, period, or a hashtag. Variable names have a set of characters you can choose from which are any letters, numbers and underscores. Second, variable names should not start with a number. Variable names must start with a letter or a underscores. Third, variable names are case sensitive. Which means that you can use uppercase and lowercase letters. That also means that the variable name `Christmas_Decorations` is not the same as `christmas_decorations`. What are the standards for variable names? Well there are many, and this question can spark many debates if asked for a single standard. I will simply provide the most common ones that I am familiar with and leave it up to you to choose a standard. One of them is called camelCase. The first letter of the first word is lowercase and all other words are upper case. Another case is underscore_case. All words are lowercase and separated by underscores. There are exceptions to these two as there often are with everything. Some exceptions may include acronyms such as IP or constants which are typically all caps."
+            },
+            {
+                "heading":"Conclusion",
+                "image":"static/images/variables[cmsc101]/Conclusion.jpg",
+                "text":"In conclusion, in order to store and reference data, we use variables. These variables are analogous to moving boxes, each box stores a specific type of object and labels them. There are some rules to defining these variables. Rules such as the first character can not be a number and you can’t use any special characters except for “_”. There are different standards to naming variables such as underscore_case and camelCase. Variables are a base topic necessary to start programming but it is not the only required knowledge point. Wait for my next article on data types and eventually we will start projects and simple programs"
+            }
+        ]
+}

@@ -5,9 +5,9 @@
     "current_title": {
       "Name": "Technology Intern",
       "Company": "FedData",
-      "Description": "I develop software",
-      "Start": "Jul, 2017",
-      "End": "Present"
+      "Description": "I develop proof of concept software primarly in Python3. I use tools like Flask and Django to develop Python based APIs and Docker or dpgk-deb to package these tools.",
+      "Start Date": "Jul, 2017",
+      "End Date": "Present"
     },
     "courses":[
       {"name":"CMSC 201","title":"Computer Science I for Majors","description":"An introduction to computer science through problem solving and computer programming. Programming techniques covered by this course include modularity, abstraction, top-down design, specifications documentation, debugging and testing. The core material for this course includes control structures, functions, lists, strings, abstract data types, file I/O, and recursion. "},
@@ -22,8 +22,8 @@
     "skill_types": [
       {
         "name": "Programming",
-        "gradient-from": "blue",
-        "gradient-to": "purple",
+        "gradient-from": "tan",
+        "gradient-to": "teal",
         "skills": [
           {
             "name": "Python",
@@ -74,8 +74,8 @@
       },
       {
         "name": "Software",
-        "gradient-from": "purple",
-        "gradient-to": "pink",
+        "gradient-from": "skyblue",
+        "gradient-to": "tan",
         "skills": [
           {
             "name": "Git",
@@ -121,8 +121,8 @@
       },
       {
         "name": "Interpersonal",
-        "gradient-from": "pink",
-        "gradient-to": "red",
+        "gradient-from": "tan",
+        "gradient-to": "skyblue",
         "skills": [
           {
             "name": "Presentations",
@@ -148,11 +148,11 @@
       }
     ],
     "major": {
-      "Major": "Computer Science",
-      "Minor": "Math",
-      "University": "UMBC",
-      "Start": "Aug, 2016",
-      "End": "May, 2020"
+      "Major": "Computer Science BS",
+      "Minor": "Pyschology",
+      "University": "University of Maryland Baltimore County",
+      "Start Date": "Aug, 2016",
+      "Expected Graduation": "May, 2020"
     }
   }
 ]
