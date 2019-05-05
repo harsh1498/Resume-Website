@@ -6,17 +6,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="static/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
     <script src="static/js/uikit.min.js"></script>
     <script src="static/js/uikit-icons.min.js"></script>
     <script src="static/js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body class="uk-text-center uk-background-muted">
+<body class="uk-text-center uk-background-muted" style="font-family: 'Roboto', sans-serif;">
     {% block body %} {% endblock %}
 </body>
 
 <br>
 <footer class="uk-text-center uk-background-muted">
+    <div class="uk-alert-warning" uk-alert>
+        <p>This site uses cookies. By continuing to browse the site you are agreeing to our use of cookies.</p>
+    </div>
     <p>Made with ☕ by Harsh Patel</p>
 </footer>
+</html>
